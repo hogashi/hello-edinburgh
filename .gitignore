@@ -1,0 +1,6 @@
+.bundle/
+vendor/
+*.swp
+*.log
+
+.env
