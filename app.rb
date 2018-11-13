@@ -8,53 +8,79 @@ require 'sinatra'
 require 'thin'
 
 require 'twitter'
+require 'omniauth-twitter'
 
 Dotenv.load
 
-client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = ENV["CONSUMER_KEY"]
-  config.consumer_secret     = ENV["CONSUMER_SECRET"]
-  config.access_token        = ENV["ACCESS_TOKEN"]
-  config.access_token_secret = ENV["ACCESS_TOKEN_SECRET"]
+configure do
+  enable :sessions
+
+  use OmniAuth::Builder do
+    provider :twitter, ENV["CONSUMER_KEY"], ENV["CONSUMER_SECRET"]
+  end
 end
 
-#lat = 30.0
-#long = 150.0
+helpers do
+  def logged_in?
+    session[:client].nil?
+  end
+end
 
-# Edinburgh, Scotland
-lat  = 55.9413212
-long = -3.3454201
+before do
+  pass if request.path_info =~ /^\/auth\//
 
-geoopts = {
-  :lat  => lat,
-  :long => long,
-  :name => 'Edinburgh',
-}
+  redirect to('/auth/twitter') unless logged_in?
+end
 
-place = client.similar_places(geoopts).first
+get '/auth/twitter/callback' do
+  auth_hash = env['omniauth.auth']
+  p auth_hash
+  credentials = auth_hash[:credentials]
+  p credentials
 
-#p place
+  client = Twitter::REST::Client.new do |config|
+    config.consumer_key        = ENV["CONSUMER_KEY"]
+    config.consumer_secret     = ENV["CONSUMER_SECRET"]
+    config.access_token        = credentials[:token]
+    config.access_token_secret = credentials[:secret]
+  end
+  p client
 
-opts = {
-  :place => place,
-}
+  # Edinburgh, Scotland
+  geoopts = {
+    :lat  => 55.9413212,
+    :long => -3.3454201,
+    :name => 'Edinburgh',
+  }
+
+  place = client.similar_places(geoopts).first
+  p place
+
+  session[:auth_hash] = auth_hash
+  session[:client] = client
+  session[:opts] = { :place => place }
+  session[:message] = 'logged in'
+
+  redirect to('/')
+end
 
 get '/' do
-  erb :index, :locals => { :res_ok => '' }
+  message = session[:message]
+  session[:message] = ''
+  erb :index, :locals => { :message => message }
 end
 
 post '/' do
-  #text = "test: a: #{lat}, o: #{long}, #{Time.now.to_s}"
   #p params
   text = params['text']
-  res = "ok or ng"
   begin
     res = client.update(text, opts)
-    res_ok = 'ok'
+    message = 'ok'
   rescue
-    res_ok = 'ng'
+    message = 'ng'
   end
-  #p res
-  erb :index, :locals => { :res_ok => res_ok }
+  p res
+  session[:message] = ''
+  erb :index, :locals => { :message => message }
 end
 

@@ -3,6 +3,6 @@ source "https://rubygems.org"
 gem 'dotenv'
 gem 'sinatra'
 gem 'thin'
-gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'twitter'
 

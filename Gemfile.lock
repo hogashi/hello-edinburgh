@@ -25,9 +25,16 @@ GEM
     multipart-post (2.0.0)
     mustermann (1.0.3)
     naught (1.1.0)
+    oauth (0.5.4)
     omniauth (1.8.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-twitter (1.4.0)
+      omniauth-oauth (~> 1.1)
+      rack
     public_suffix (3.0.3)
     rack (2.0.6)
     rack-protection (2.0.4)
@@ -64,7 +71,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
-  omniauth
+  omniauth-twitter
   sinatra
   thin
   twitter
