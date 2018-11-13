@@ -35,11 +35,12 @@ before do
   #p logged_in?
   #p request.path_info
   #p request.path_info.match? /^\/auth/
-  unless request.path_info.match? /^\/auth/
-    unless logged_in?
-      redirect to('/auth/twitter')
-    end
-  end
+
+  #unless request.path_info.match? /^\/auth/
+  #  unless logged_in?
+  #    redirect to('/auth/twitter')
+  #  end
+  #end
 end
 
 get '/auth/twitter/callback' do
@@ -76,13 +77,14 @@ get '/auth/twitter/callback' do
 end
 
 get '/auth' do
-  erb :index, :locals => { :message => 'debug' }
+  @message = 'debug'
+  erb :index
 end
 
 get '/' do
-  message = session[:message]
+  @message = session[:message]
   session[:message] = ''
-  erb :index, :locals => { :message => message }
+  erb :index
 end
 
 post '/' do
@@ -94,12 +96,17 @@ post '/' do
   #p opts
   begin
     res = client.update(text, opts)
-    message = 'ok: #{res.id}'
+    @message = "ok: #{res.id}"
   rescue
-    message = 'ng'
+    @message = "ng"
   end
   #p res
   session[:message] = ''
-  erb :index, :locals => { :message => message }
+  erb :index
+end
+
+get '/logout' do
+  session.clear
+  redirect to('/')
 end
 
