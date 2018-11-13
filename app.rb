@@ -22,21 +22,31 @@ end
 
 helpers do
   def logged_in?
-    session[:client].nil?
+    !session[:client].nil?
+  end
+  def current_client
+    session[:client]
   end
 end
 
 before do
-  pass if request.path_info =~ /^\/auth\//
-
-  redirect to('/auth/twitter') unless logged_in?
+  #p '--------------------'
+  #p session[:client]
+  #p logged_in?
+  #p request.path_info
+  #p request.path_info.match? /^\/auth/
+  unless request.path_info.match? /^\/auth/
+    unless logged_in?
+      redirect to('/auth/twitter')
+    end
+  end
 end
 
 get '/auth/twitter/callback' do
   auth_hash = env['omniauth.auth']
-  p auth_hash
+  #p auth_hash
   credentials = auth_hash[:credentials]
-  p credentials
+  #p credentials
 
   client = Twitter::REST::Client.new do |config|
     config.consumer_key        = ENV["CONSUMER_KEY"]
@@ -44,7 +54,7 @@ get '/auth/twitter/callback' do
     config.access_token        = credentials[:token]
     config.access_token_secret = credentials[:secret]
   end
-  p client
+  #p client
 
   # Edinburgh, Scotland
   geoopts = {
@@ -54,14 +64,19 @@ get '/auth/twitter/callback' do
   }
 
   place = client.similar_places(geoopts).first
-  p place
+  #p place
 
-  session[:auth_hash] = auth_hash
+  #session[:auth_hash] = auth_hash
   session[:client] = client
   session[:opts] = { :place => place }
   session[:message] = 'logged in'
 
+  #redirect to('/auth')
   redirect to('/')
+end
+
+get '/auth' do
+  erb :index, :locals => { :message => 'debug' }
 end
 
 get '/' do
@@ -73,13 +88,17 @@ end
 post '/' do
   #p params
   text = params['text']
+  client = session[:client]
+  #p client
+  opts = session[:opts]
+  #p opts
   begin
     res = client.update(text, opts)
-    message = 'ok'
+    message = 'ok: #{res.id}'
   rescue
     message = 'ng'
   end
-  p res
+  #p res
   session[:message] = ''
   erb :index, :locals => { :message => message }
 end
