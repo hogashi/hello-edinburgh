@@ -6,3 +6,5 @@ gem 'thin'
 gem 'omniauth-twitter'
 gem 'twitter'
 
+gem 'foreman'
+
