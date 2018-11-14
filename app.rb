@@ -88,9 +88,10 @@ class Edinburgh < Sinatra::Base
     erb :index
   end
 
-  post '/' do
-    #p params
-    text = params['text']
+  get '/tweet' do
+    p params
+    #text = "#{params[:text]} : #{Time.now().to_s}"
+    text = params[:text]
     client = session[:client]
     #p client
     opts = session[:opts]
@@ -103,7 +104,8 @@ class Edinburgh < Sinatra::Base
     end
     #p res
     session[:message] = ''
-    erb :index
+    #erb :index
+    @message
   end
 
   get '/logout' do

@@ -8,13 +8,21 @@ document.addEventListener('DOMContentLoaded', e => {
 
 const textarea = document.querySelector('#text');
 const goButton = document.querySelector('#goButton');
+const message  = document.querySelector('#message');
 
 goButton.addEventListener('click', e => {
-  const text = textarea.value;
-  axios.get(`/tweet?${text}`)
+  const text = encodeURIComponent(textarea.value.trim());
+  // axios.post('/tweet', {
+  //   hoge: 123,
+  //   text: text,
+  // })
+  axios.get(`/tweet?text=${text}`)
   .then(res => {
     console.log(res);
-    textarea.value = '';
+    if (res.data !== 'ng') {
+      textarea.value = '';
+    }
+    message.innerText = res.data;
   })
   .catch(err => {
     console.log(err);
