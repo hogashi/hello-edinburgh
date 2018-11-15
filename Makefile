@@ -1,5 +1,5 @@
 build:
-	bundle install
+	bundle install --path vendor/bundle
 	yarn install && yarn build
 
 deploy:
