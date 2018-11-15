@@ -1,7 +1,7 @@
 # hello-edinburgh
 
 1. edit `.env` (sample: `.env.sample`)
-1. `$ bundle install`
-1. `$ yarn install`
-1. `$ bundle exec foreman start`
+1. `$ apt install yarn`
+1. `$ gem install bundler`
+1. `$ make deploy`
 
