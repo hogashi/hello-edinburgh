@@ -4,6 +4,7 @@ require 'rubygems'
 
 require 'dotenv'
 
+require 'json'
 require 'sinatra/base'
 require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
@@ -34,8 +35,17 @@ class Edinburgh < Sinatra::Base
       session[:client]
     end
     def format_tweet(tweet)
+      id = tweet.id
+      user = tweet.user
       formatted = {}
-      formatted[:user] = tweet.user
+      formatted[:id] = id
+      formatted[:tweet_url] = "https://twitter.com/#{user.name}/status/#{id}"
+      formatted[:created_at] = tweet.created_at.strftime("%Y%m%d-%H%M%S")
+      formatted[:user] = {
+        :icon => user.profile_image_url,
+        :name => user.name,
+        :screen_name => user.screen_name,
+      }
       text = tweet.full_text
       media_urls = []
       tweet.uris.each do |u|
@@ -124,7 +134,33 @@ class Edinburgh < Sinatra::Base
     erb :index
   end
 
-  get '/tweet' do
+  # API
+  get '/api/rate_limit_status' do
+  end
+
+  get '/api/home_timeline' do
+    return 401 unless logged_in?
+
+    p params
+    opts = {}
+    if !params[:since_id].empty?
+      opts = {
+        :since_id => params[:since_id].to_i,
+      }
+    end
+    p opts
+
+    client = session[:client]
+    tweets = client.home_timeline(opts)
+    @tweets = tweets.map do |tweet|
+      format_tweet(tweet)
+    end
+
+    erb :tweets, :layout => false
+  end
+
+  # TODO, post にしたい
+  get '/api/tweet' do
     p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
     text = params[:text]
