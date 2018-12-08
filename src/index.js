@@ -63,13 +63,13 @@ switch (window.location.pathname) {
 
       loadTimeline();
       loadTimer = setInterval(() => {
-        timer.innerText = count;
         count += 1;
         if (count >= 60) {
           count = 0;
           console.log(`loading timeline, sinceId: ${sinceId}`);
           loadTimeline();
         }
+        timer.innerText = count;
       }, 1 * 1000);
     });
     break;
