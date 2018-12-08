@@ -6,7 +6,8 @@
   "author": "hogashi <i1511015@edu.cc.uec.ac.jp>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --mode development --config webpack.config.js",
+    "watch": "webpack --mode development --config webpack.config.js --watch",
     "heroku-postbuild": "webpack --config webpack.config.js",
     "babel": "babel src --out-dir public/js",
     "babelw": "babel src --watch --out-dir public/js"
