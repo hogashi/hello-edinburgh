@@ -3,5 +3,10 @@
     Edinburgh
   </a>
 </h1>
+<% if logged_in? %>
+  <nav>
+    <a href='/timeline'>timeline</a>
+  </nav>
+<% end %>
 <%= yield %>
 <script src="/js/index.js"></script>
