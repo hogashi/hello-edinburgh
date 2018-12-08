@@ -1,4 +1,4 @@
-require './app'
+require './edinburgh'
 
 run Edinburgh
 

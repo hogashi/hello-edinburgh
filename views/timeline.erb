@@ -1,0 +1,38 @@
+<div>
+  <p>sec: <span id="timer">0</span></p>
+  <% if logged_in? %>
+    <div id="timeline">
+      <% @tweets.each do |tweet| %>
+        <div class="tweet">
+          <div class="user">
+            <span class="icon">
+              <img src="<%= tweet[:user][:icon] %>">
+            </span>
+            <span class="name">
+              <%= tweet[:user][:name] %>
+            </span>
+            <span class="screenName">
+              @<%= tweet[:user][:screen_name] %>
+            </span>
+          </div>
+          <p class="text">
+            <%= tweet[:text] %>
+          </p>
+          <div class="media">
+            <% tweet[:media_urls].each do |media_url| %>
+              <img src="<%= media_url %>">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <p id="message"><%= @message %></p>
+    <div>
+      <a href="/logout">logout</a>
+    </div>
+  <% else %>
+    <div>
+      <a href="/auth/twitter">login</a>
+    </div>
+  <% end %>
+</div>

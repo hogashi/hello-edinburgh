@@ -4,7 +4,9 @@ require 'rubygems'
 
 require 'dotenv'
 
+require 'json'
 require 'sinatra/base'
+require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
 
 require 'twitter'
@@ -13,6 +15,10 @@ require 'omniauth-twitter'
 Dotenv.load
 
 class Edinburgh < Sinatra::Base
+  configure :development do
+    register Sinatra::Reloader
+  end
+
   configure do
     enable :sessions
 
@@ -27,6 +33,31 @@ class Edinburgh < Sinatra::Base
     end
     def current_client
       session[:client]
+    end
+    def format_tweet(tweet)
+      id = tweet.id
+      user = tweet.user
+      formatted = {}
+      formatted[:id] = id
+      formatted[:tweet_url] = "https://twitter.com/#{user.name}/status/#{id}"
+      formatted[:created_at] = tweet.created_at.strftime("%Y%m%d-%H%M%S")
+      formatted[:user] = {
+        :icon => user.profile_image_url,
+        :name => user.name,
+        :screen_name => user.screen_name,
+      }
+      text = tweet.full_text
+      media_urls = []
+      tweet.uris.each do |u|
+        text = text.gsub(u.uri, "<a href=\"#{u.expanded_uri}\">#{u.display_uri}</a>")
+      end
+      tweet.media.each do |m, i|
+        media_urls.push(m.media_url_https)
+        text = text.gsub(m.uri, "<a href=\"#{m.media_url_https}\">#{m.display_uri}</a>")
+      end
+      formatted[:text] = text
+      formatted[:media_urls] = media_urls
+      return formatted
     end
   end
 
@@ -82,13 +113,54 @@ class Edinburgh < Sinatra::Base
     erb :index
   end
 
+  get '/timeline' do
+    redirect to('/') unless logged_in?
+
+    client = session[:client]
+    tweets = client.home_timeline
+    @tweets = tweets.map do |tweet|
+      format_tweet(tweet)
+    end
+    p @tweets
+
+    @message = session[:message]
+    session[:message] = ''
+    erb :timeline
+  end
+
   get '/' do
     @message = session[:message]
     session[:message] = ''
     erb :index
   end
 
-  get '/tweet' do
+  # API
+  get '/api/rate_limit_status' do
+  end
+
+  get '/api/home_timeline' do
+    return 401 unless logged_in?
+
+    p params
+    opts = {}
+    if !params[:since_id].empty?
+      opts = {
+        :since_id => params[:since_id].to_i,
+      }
+    end
+    p opts
+
+    client = session[:client]
+    tweets = client.home_timeline(opts)
+    @tweets = tweets.map do |tweet|
+      format_tweet(tweet)
+    end
+
+    erb :tweets, :layout => false
+  end
+
+  # TODO, post にしたい
+  get '/api/tweet' do
     p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
     text = params[:text]
