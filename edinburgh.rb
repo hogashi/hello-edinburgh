@@ -46,7 +46,7 @@ class Edinburgh < Sinatra::Base
         :name => user.name,
         :screen_name => user.screen_name,
       }
-      text = tweet.full_text
+      text = tweet.full_text.gsub(/\n/, '<br>')
       media_urls = []
       tweet.uris.each do |u|
         text = text.gsub(u.uri, "<a href=\"#{u.expanded_uri}\">#{u.display_uri}</a>")
