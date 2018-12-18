@@ -39,10 +39,10 @@ class Edinburgh < Sinatra::Base
       user = tweet.user
       formatted = {}
       formatted[:id] = id
-      formatted[:tweet_url] = "https://twitter.com/#{user.name}/status/#{id}"
+      formatted[:tweet_url] = tweet.uri
       formatted[:created_at] = tweet.created_at.strftime("%Y%m%d-%H%M%S")
       formatted[:user] = {
-        :icon => user.profile_image_url,
+        :icon => user.profile_image_uri_https,
         :name => user.name,
         :screen_name => user.screen_name,
       }
