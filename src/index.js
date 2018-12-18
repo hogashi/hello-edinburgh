@@ -39,7 +39,7 @@ switch (window.location.pathname) {
         //   hoge: 123,
         //   text: text,
         // })
-        axios.get(`/api/tweets?text=${text}`)
+        axios.get(`/api/tweet?text=${text}`)
         .then(res => {
           console.log(res);
           if (res.data !== 'ng') {
