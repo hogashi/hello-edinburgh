@@ -117,11 +117,11 @@ class Edinburgh < Sinatra::Base
     redirect to('/') unless logged_in?
 
     client = session[:client]
-    tweets = client.home_timeline
-    @tweets = tweets.map do |tweet|
-      format_tweet(tweet)
-    end
-    p @tweets
+    #tweets = client.home_timeline
+    #@tweets = tweets.map do |tweet|
+    #  format_tweet(tweet)
+    #end
+    #p @tweets
 
     @message = session[:message]
     session[:message] = ''
@@ -151,7 +151,18 @@ class Edinburgh < Sinatra::Base
     p opts
 
     client = session[:client]
-    tweets = client.home_timeline(opts)
+    begin
+      tweets = client.home_timeline(opts)
+    rescue => evar
+      p evar
+      p evar.code
+      p evar.message
+      p evar.rate_limit
+      reset_at = evar.rate_limit.reset_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S")
+      p reset_at
+      return 400, "#{evar.code}, #{evar.message}, reset at: #{reset_at}"
+    end
+
     @tweets = tweets.map do |tweet|
       format_tweet(tweet)
     end

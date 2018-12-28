@@ -10,22 +10,21 @@ const message  = document.querySelector('#message');
 const timeline = document.querySelector('#timeline');
 const timer = document.querySelector('#timer');
 
-let loadTimer;
 let sinceId = 0;
-let count = 0;
 
 const loadTimeline = () => {
   const lastTweet = timeline.querySelector('.tweet');
   if (lastTweet) {
     sinceId = lastTweet.getAttribute('data-id');
   }
+  console.log(`loading timeline, sinceId: ${sinceId}`);
   axios.get(`/api/home_timeline?since_id=${sinceId || ''}`)
   .then(res => {
     console.log(res);
     timeline.insertAdjacentHTML('afterbegin', res.data);
   })
   .catch(err => {
-    console.log(err);
+    console.log(err, err.response, err.response.data);
   });
 };
 
@@ -58,15 +57,16 @@ switch (window.location.pathname) {
     });
     break;
   case '/timeline':
+    let loadTimer;
+    let count = 60;
     document.addEventListener('DOMContentLoaded', e => {
       console.log('timeline.js loaded');
 
       loadTimeline();
       loadTimer = setInterval(() => {
-        count += 1;
-        if (count >= 60) {
-          count = 0;
-          console.log(`loading timeline, sinceId: ${sinceId}`);
+        count -= 1;
+        if (count < 0) {
+          count = 60;
           loadTimeline();
         }
         timer.innerText = count;
