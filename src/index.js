@@ -10,9 +10,7 @@ const message  = document.querySelector('#message');
 const timeline = document.querySelector('#timeline');
 const timer = document.querySelector('#timer');
 
-let loadTimer;
 let sinceId = 0;
-let count = 0;
 
 const loadTimeline = () => {
   const lastTweet = timeline.querySelector('.tweet');
@@ -58,14 +56,16 @@ switch (window.location.pathname) {
     });
     break;
   case '/timeline':
+    let loadTimer;
+    let count = 60;
     document.addEventListener('DOMContentLoaded', e => {
       console.log('timeline.js loaded');
 
       loadTimeline();
       loadTimer = setInterval(() => {
-        count += 1;
-        if (count >= 60) {
-          count = 0;
+        count -= 1;
+        if (count < 0) {
+          count = 60;
           console.log(`loading timeline, sinceId: ${sinceId}`);
           loadTimeline();
         }
