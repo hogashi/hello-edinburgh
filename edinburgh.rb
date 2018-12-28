@@ -40,7 +40,7 @@ class Edinburgh < Sinatra::Base
       formatted = {}
       formatted[:id] = id
       formatted[:tweet_url] = tweet.uri
-      formatted[:created_at] = tweet.created_at.strftime("%Y%m%d-%H%M%S")
+      formatted[:created_at] = tweet.created_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S")
       formatted[:user] = {
         :icon => user.profile_image_uri_https,
         :name => user.name,
