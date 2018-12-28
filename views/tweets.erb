@@ -24,5 +24,26 @@
         <img src="<%= media_url %>">
       <% end %>
     </div>
+    <% if tweet[:retweeter] %>
+      <div class="retweeter">
+        <span>RTby</span>
+        <div class="user">
+          <span class="icon">
+            <img src="<%= tweet[:retweeter][:user][:icon] %>">
+          </span>
+          <span class="name">
+            <%= tweet[:retweeter][:user][:name] %>
+          </span>
+          <span class="screenName">
+            @<%= tweet[:retweeter][:user][:screen_name] %>
+          </span>
+          <span class="created_at">
+            <a href="<%= tweet[:retweeter][:tweet_url] %>">
+              <%= tweet[:retweeter][:created_at] %>
+            </a>
+          </span>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
