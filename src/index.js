@@ -17,6 +17,7 @@ const loadTimeline = () => {
   if (lastTweet) {
     sinceId = lastTweet.getAttribute('data-id');
   }
+  console.log(`loading timeline, sinceId: ${sinceId}`);
   axios.get(`/api/home_timeline?since_id=${sinceId || ''}`)
   .then(res => {
     console.log(res);
@@ -66,7 +67,6 @@ switch (window.location.pathname) {
         count -= 1;
         if (count < 0) {
           count = 60;
-          console.log(`loading timeline, sinceId: ${sinceId}`);
           loadTimeline();
         }
         timer.innerText = count;
