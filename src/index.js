@@ -24,7 +24,7 @@ const loadTimeline = () => {
     timeline.insertAdjacentHTML('afterbegin', res.data);
   })
   .catch(err => {
-    console.log(err);
+    console.log(err, err.response, err.response.data);
   });
 };
 
