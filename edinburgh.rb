@@ -63,12 +63,12 @@ class Edinburgh < Sinatra::Base
       p "full: '#{tweet.full_text}'"
       text = tweet.full_text.gsub(/\n/, '<br>')
       tweet.uris.each do |u|
-        text = text.gsub(u.uri.to_s, "<a href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
+        text = text.gsub(u.uri.to_s, "<a target=\"_blank\" href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
       end
       media_urls = []
       tweet.media.each do |m, i|
         media_urls.push(m.media_url_https.to_s)
-        text = text.gsub(m.uri.to_s, "<a href=\"#{m.media_url_https.to_s}\">#{m.display_uri.to_s}</a>")
+        text = text.gsub(m.uri.to_s, "<a target=\"_blank\" href=\"#{m.media_url_https.to_s}\">#{m.display_uri.to_s}</a>")
       end
       formatted[:text] = text
       formatted[:media_urls] = media_urls
