@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/hogashi/twitter.git
+  remote: git://github.com/hogashi/twitter.git
   revision: e3b13c2f7f534c4e4f1dfc1820775491582cad98
   specs:
     twitter (6.2.0.1)
