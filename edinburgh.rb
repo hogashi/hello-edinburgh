@@ -59,9 +59,9 @@ class Edinburgh < Sinatra::Base
       end
       formatted = format_tweet_base(tweet)
       formatted[:retweeter] = retweeter
-      p "text: '#{tweet.text}'"
-      p "full: '#{tweet.full_text}'"
-      text = tweet.full_text.gsub(/\n/, '<br>')
+      p tweet.attrs
+      p "full: '#{tweet.attrs[:full_text]}'"
+      text = tweet.attrs[:full_text].gsub(/\n/, '<br>')
       tweet.uris.each do |u|
         text = text.gsub(u.uri.to_s, "<a target=\"_blank\" href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
       end
@@ -160,7 +160,7 @@ class Edinburgh < Sinatra::Base
     p params
     # TODO, add count-number setting
     opts = {
-      :count => 200,
+      :count => 60,
     }
     if !params[:since_id].empty?
       opts = {

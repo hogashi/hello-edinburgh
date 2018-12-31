@@ -7,7 +7,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'thin'
 gem 'omniauth-twitter'
-gem 'twitter'
+gem 'twitter', :github => 'hogashi/twitter'
 
 gem 'foreman'
 

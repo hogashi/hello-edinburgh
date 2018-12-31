@@ -1,5 +1,5 @@
 <% @tweets.each do |tweet| %>
-  <div class="tweet" data-id="<%= tweet[:id] %>">
+  <div class="tweet" data-id="<%= tweet[:retweeter] ? tweet[:retweeter][:id] : tweet[:id] %>">
     <div class="user">
       <span class="icon">
         <img src="<%= tweet[:user][:icon] %>">
