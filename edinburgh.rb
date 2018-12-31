@@ -158,7 +158,10 @@ class Edinburgh < Sinatra::Base
     return 401 unless logged_in?
 
     p params
-    opts = {}
+    # TODO, add count-number setting
+    opts = {
+      :count => 200,
+    }
     if !params[:since_id].empty?
       opts = {
         :since_id => params[:since_id].to_i,
