@@ -38,10 +38,10 @@ class Edinburgh < Sinatra::Base
       user = tweet.user
       formatted_base = {
         :id => tweet.id,
-        :tweet_url => tweet.uri,
+        :tweet_url => tweet.uri.to_s,
         :created_at => tweet.created_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S"),
         :user => {
-          :icon => user.profile_image_uri_https,
+          :icon => user.profile_image_uri_https.to_s,
           :name => user.name,
           :screen_name => user.screen_name,
         },
@@ -63,14 +63,14 @@ class Edinburgh < Sinatra::Base
       p "full: '#{tweet.full_text}'"
       text = tweet.full_text.gsub(/\n/, '<br>')
       tweet.uris.each do |u|
-        text = text.gsub(u.uri, "<a href=\"#{u.expanded_uri}\">#{u.display_uri}</a>")
+        text = text.gsub(u.uri.to_s, "<a href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
       end
-      formatted[:text] = text
       media_urls = []
       tweet.media.each do |m, i|
-        media_urls.push(m.media_url_https)
-        text = text.gsub(m.uri, "<a href=\"#{m.media_url_https}\">#{m.display_uri}</a>")
+        media_urls.push(m.media_url_https.to_s)
+        text = text.gsub(m.uri.to_s, "<a href=\"#{m.media_url_https.to_s}\">#{m.display_uri.to_s}</a>")
       end
+      formatted[:text] = text
       formatted[:media_urls] = media_urls
       p formatted
       return formatted
