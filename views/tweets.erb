@@ -1,5 +1,5 @@
 <% @tweets.each do |tweet| %>
-  <div class="tweet" data-id="<%= tweet[:id] %>">
+  <div class="tweet" data-id="<%= tweet[:retweeter] ? tweet[:retweeter][:id] : tweet[:id] %>">
     <div class="user">
       <span class="icon">
         <img src="<%= tweet[:user][:icon] %>">
@@ -11,7 +11,7 @@
         @<%= tweet[:user][:screen_name] %>
       </span>
       <span class="created_at">
-        <a href="<%= tweet[:tweet_url] %>">
+        <a target="_blank" href="<%= tweet[:tweet_url] %>">
           <%= tweet[:created_at] %>
         </a>
       </span>
@@ -38,7 +38,7 @@
             @<%= tweet[:retweeter][:user][:screen_name] %>
           </span>
           <span class="created_at">
-            <a href="<%= tweet[:retweeter][:tweet_url] %>">
+            <a target="_blank" href="<%= tweet[:retweeter][:tweet_url] %>">
               <%= tweet[:retweeter][:created_at] %>
             </a>
           </span>

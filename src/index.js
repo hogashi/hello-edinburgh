@@ -10,9 +10,8 @@ const message  = document.querySelector('#message');
 const timeline = document.querySelector('#timeline');
 const timer = document.querySelector('#timer');
 
-let sinceId = 0;
-
 const loadTimeline = () => {
+  let sinceId = 0;
   const lastTweet = timeline.querySelector('.tweet');
   if (lastTweet) {
     sinceId = lastTweet.getAttribute('data-id');
