@@ -21,7 +21,9 @@
     </p>
     <div class="media">
       <% tweet[:media_urls].each do |media_url| %>
-        <img src="<%= media_url %>">
+        <div class="medium">
+          <img src="<%= media_url %>">
+        </div>
       <% end %>
     </div>
     <% if tweet[:retweeter] %>

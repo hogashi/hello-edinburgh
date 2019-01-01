@@ -7,7 +7,7 @@ const goButton = document.querySelector('#goButton');
 const message  = document.querySelector('#message');
 
 // timeline
-const timeline = document.querySelector('#timeline');
+const tweetsContainer = document.querySelector('#tweets');
 const timer = document.querySelector('#timer');
 
 const loadTimeline = () => {
@@ -20,7 +20,7 @@ const loadTimeline = () => {
   axios.get(`/api/home_timeline?since_id=${sinceId || ''}`)
   .then(res => {
     console.log(res);
-    timeline.insertAdjacentHTML('afterbegin', res.data);
+    tweetsContainer.insertAdjacentHTML('afterbegin', res.data);
   })
   .catch(err => {
     console.log(err, err.response, err.response.data);
