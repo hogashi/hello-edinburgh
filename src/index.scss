@@ -7,33 +7,80 @@ html, body {
 
 #timeline {
   width: 100%;
+}
 
-  #tweets {
+#tweets {
+  width: 100%;
+
+  > .tweet {
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-top: 1px solid #cccccc;
+    font-size: 16px;
 
-    > .tweet {
-      width: 100%;
+    > .icon {
+      flex: 0 1 auto;
 
-      > .media {
+      > img {
+        width: 2.5em;
+      }
+    }
+
+    > .contents {
+      flex: 1 1 auto;
+      padding: 3px 3px 3px 5px;
+
+      > div {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
 
-        > .medium {
-          flex: 0 1 auto;
-          max-width: calc(25% - 2px * 2);
+        &.user {
+          margin-bottom: 3px;
 
-          > img {
-            width: auto;
-            max-width: 100%;
-            max-height: 10em;
+          > .span {
+            margin-right: 2px;
+
+            &.name {
+              color: #303030;
+            }
+
+            &.screenName {
+              color: #525252;
+              font-size: 0.9em;
+            }
+
+            &.createdAt {
+              font-size: 0.7em;
+            }
+          }
+        }
+
+        &.text {
+          padding: 3px 0;
+        }
+
+        &.media {
+          display: flex;
+          justify-content: flex-start;
+
+          > .medium {
+            flex: 0 1 auto;
+            padding: 2px;
+            max-width: calc(25% - 2px * 2);
+
+            > img {
+              width: auto;
+              max-width: 100%;
+              max-height: 10em;
+            }
           }
         }
       }
+    }
 
-      > .retweeter {
-        font-size: 0.5em;
-      }
+    > .retweeter {
+      font-size: 0.5em;
     }
   }
 }
