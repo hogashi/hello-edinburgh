@@ -38,7 +38,7 @@ html, body {
         &.user {
           margin-bottom: 3px;
 
-          > .span {
+          > span {
             margin-right: 2px;
 
             &.name {
@@ -102,6 +102,10 @@ html, body {
 
           &.screenName {
             color: #707070;
+          }
+
+          &.createdAt {
+            font-size: 0.9em;
           }
         }
       }
