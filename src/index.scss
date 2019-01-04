@@ -77,10 +77,34 @@ html, body {
           }
         }
       }
-    }
 
-    > .retweeter {
-      font-size: 0.5em;
+      > .retweeter {
+        margin-top: 2px;
+        font-size: 0.8em;
+
+        > span {
+          margin-left: 2px;
+
+          &.rtby {
+            color: #707070;
+          }
+
+          &.icon {
+
+            > img {
+              width: 1.2em;
+            }
+          }
+
+          &.name {
+            color: #707070;
+          }
+
+          &.screenName {
+            color: #707070;
+          }
+        }
+      }
     }
   }
 }

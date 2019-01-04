@@ -29,23 +29,21 @@
       </div>
       <% if tweet[:retweeter] %>
         <div class="retweeter">
-          <span>RTby</span>
-          <div class="user">
-            <span class="icon">
-              <img src="<%= tweet[:retweeter][:user][:icon] %>">
-            </span>
-            <span class="name">
-              <%= tweet[:retweeter][:user][:name] %>
-            </span>
-            <span class="screenName">
-              @<%= tweet[:retweeter][:user][:screen_name] %>
-            </span>
-            <span class="created_at">
-              <a target="_blank" href="<%= tweet[:retweeter][:tweet_url] %>">
-                <%= tweet[:retweeter][:created_at] %>
-              </a>
-            </span>
-          </div>
+          <span class="rtby">RTby</span>
+          <span class="icon">
+            <img src="<%= tweet[:retweeter][:user][:icon] %>">
+          </span>
+          <span class="name">
+            <%= tweet[:retweeter][:user][:name] %>
+          </span>
+          <span class="screenName">
+            @<%= tweet[:retweeter][:user][:screen_name] %>
+          </span>
+          <span class="created_at">
+            <a target="_blank" href="<%= tweet[:retweeter][:tweet_url] %>">
+              <%= tweet[:retweeter][:created_at] %>
+            </a>
+          </span>
         </div>
       <% end %>
     </div>
