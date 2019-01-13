@@ -22,6 +22,9 @@ class Edinburgh < Sinatra::Base
   configure do
     enable :sessions
 
+    mime_type :js, 'text/javascript'
+    mime_type :css, 'text/css'
+
     use OmniAuth::Builder do
       provider :twitter, ENV["CONSUMER_KEY"], ENV["CONSUMER_SECRET"]
     end
