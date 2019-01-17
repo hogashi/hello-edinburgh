@@ -1,13 +1,38 @@
 html, body {
   width: 100%;
   margin: 0;
-  padding: 0 3px;
   box-sizing: border-box;
   font-family: sans-serif;
 }
 
+nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  background: #494949;
+  padding: 4px 7px;
+
+  > a {
+    display: inline-block;
+    flex: 0 1 auto;
+    color: #b1b6bc;
+    margin-right: 15px;
+
+    &.home {
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}
+
 #timeline {
   width: 100%;
+  padding: 0 3px;
+
+  > p {
+    margin: 2px;
+  }
 }
 
 #tweets {

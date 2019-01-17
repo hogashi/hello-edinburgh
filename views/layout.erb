@@ -5,15 +5,9 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
-<h1>
-  <a href="/" style="color: black; text-decoration: none;">
-    Edinburgh
-  </a>
-</h1>
-<% if logged_in? %>
-  <nav>
-    <a href='/timeline'>timeline</a>
-  </nav>
-<% end %>
+<nav>
+  <a href="/" class="home">Edinburgh</a>
+  <a href="/timeline" class="timeline">timeline</a>
+</nav>
 <%= yield %>
 <script src="/js/index.js"></script>
