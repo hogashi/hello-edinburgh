@@ -12,6 +12,7 @@ nav {
   font-size: 14px;
   background: #494949;
   padding: 4px 7px;
+  box-sizing: border-box;
 
   > a {
     display: inline-block;
@@ -29,6 +30,7 @@ nav {
 #timeline {
   width: 100%;
   padding: 0 3px;
+  box-sizing: border-box;
 
   > p {
     margin: 2px;
@@ -57,6 +59,7 @@ nav {
     > .contents {
       flex: 1 1 auto;
       padding: 3px 3px 3px 5px;
+      box-sizing: border-box;
 
       > div {
         width: 100%;
@@ -85,6 +88,7 @@ nav {
 
         &.text {
           padding: 3px 0;
+          box-sizing: border-box;
         }
 
         &.media {
@@ -94,6 +98,7 @@ nav {
           > .medium {
             flex: 0 1 auto;
             padding: 2px;
+            box-sizing: border-box;
             max-width: calc(25% - 2px * 2);
 
             > img {
