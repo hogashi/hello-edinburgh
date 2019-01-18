@@ -4,9 +4,9 @@
   "start_url": "/",
   "display": "standalone",
   "background_color" : "#FFFFFF",
-  "theme_color": "#494949",
+  "theme_color": "#0D2553",
   "icons": [{
-    "src": "images/placehold.png",
+    "src": "images/icon.png",
     "sizes": "512x512",
     "type": "image/png"
   }]
