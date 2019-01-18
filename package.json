@@ -14,7 +14,7 @@
     "build:css": "node-sass src/index.scss public/css/index.css",
     "copy": "run-p copy:manifest copy:icon",
     "copy:manifest": "cp -f src/manifest.json public/",
-    "copy:icon": "cp -rf static/icons public/icons",
+    "copy:icon": "cp -rf static/images public/images",
     "watch": "webpack --mode development --config webpack.config.js --watch"
   },
   "devDependencies": {
