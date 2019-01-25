@@ -13,9 +13,9 @@
     "build:js": "webpack --config webpack.config.js",
     "build:css": "node-sass src/index.scss public/css/index.css",
     "copy": "run-p copy:manifest copy:icon copy:favicon",
-    "copy:manifest": "cp -f src/manifest.json public/",
-    "copy:icon": "cp -rf static/images public/images",
-    "copy:favicon": "cp -f static/favicon.ico public/",
+    "copy:manifest": "mkdir -p public && cp -f src/manifest.json public/",
+    "copy:icon": "mkdir -p public/images && cp -rf static/images public/images",
+    "copy:favicon": "mkdir -p public && cp -f static/favicon.ico public/",
     "watch": "webpack --mode development --config webpack.config.js --watch"
   },
   "devDependencies": {
