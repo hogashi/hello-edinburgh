@@ -64,7 +64,7 @@ class Edinburgh < Sinatra::Base
       formatted[:retweeter] = retweeter
       p tweet.attrs
       p "full: '#{tweet.attrs[:full_text]}'"
-      text = tweet.attrs[:full_text].gsub(/\n/, '<br>')
+      text = tweet.attrs[:full_text]
       tweet.uris.each do |u|
         text = text.gsub(u.uri.to_s, "<a target=\"_blank\" href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
       end
