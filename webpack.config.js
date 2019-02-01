@@ -1,24 +1,43 @@
+const webpack = require('webpack');
 const path = require('path');
 
-module.exports = {
-  entry: './src/index.js',
+const config = {
+  entry: './src/index.tsx',
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'public/js')
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js'
   },
   devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
       },
+      {
+        test: /\.(ts|tsx)?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      }
     ],
   },
-};
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx'
+    ]
+  }
+}
+
+module.exports = config;
