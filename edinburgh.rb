@@ -19,6 +19,10 @@ class Edinburgh < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  configure :production do
+    set :force_ssl, true
+  end
+
   configure do
     enable :sessions
 
