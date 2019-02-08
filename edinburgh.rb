@@ -19,10 +19,6 @@ class Edinburgh < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  configure :production do
-    set :force_ssl, true
-  end
-
   configure do
     enable :sessions
 
@@ -85,17 +81,11 @@ class Edinburgh < Sinatra::Base
   end
 
   before do
-    #p '--------------------'
-    #p session[:client]
-    #p logged_in?
-    #p request.path_info
-    #p request.path_info.match? /^\/auth/
-
-    #unless request.path_info.match? /^\/auth/
-    #  unless logged_in?
-    #    redirect to('/auth/twitter')
-    #  end
-    #end
+    p settings.production?
+    p request.secure?
+    if settings.production? && !request.secure?
+      redirect to('https://hello-edinburgh.herokuapp.com')
+    end
   end
 
   get '/auth/twitter/callback' do
