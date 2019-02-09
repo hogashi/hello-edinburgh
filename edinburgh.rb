@@ -81,10 +81,10 @@ class Edinburgh < Sinatra::Base
   end
 
   before do
-    p settings.production?
-    p request.secure?
+    #p settings.production?
+    #p request.secure?
     if settings.production? && !request.secure?
-      redirect to('https://hello-edinburgh.herokuapp.com')
+      redirect to(request.url.gsub(/^http/, 'https'))
     end
   end
 
