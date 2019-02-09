@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Textbox from "./components/textbox";
 import Timeline from "./components/timeline";
+import * as serviceWorker from "./serviceWorker";
 
 import "./index.scss";
 
