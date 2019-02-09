@@ -10,6 +10,9 @@ export default () => {
 
   const doTweet = useCallback(() => {
     console.log(text);
+    if (!text.trim().length) {
+      return;
+    }
     const encodedText = encodeURIComponent(text.trim());
     // Axios.post('/tweet', {
     //   hoge: 123,

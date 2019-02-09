@@ -4,7 +4,7 @@ export default () => {
   return (
     <div className="tweet" data-id="<%= tweet[:retweeter] ? tweet[:retweeter][:id] : tweet[:id] %>">
       <div className="icon">
-        <img src="<%= tweet[:user][:icon] %>" />
+        <img src={""/* "<%= tweet[:user][:icon] %>" */} />
       </div>
       <div className="contents">
         <div className="user">
@@ -26,7 +26,7 @@ export default () => {
         <div className="media">
           {/* <% tweet[:media_urls].each do |media_url| %> */}
             <div className="medium">
-              <img src="<%= media_url %>" />
+              <img src={""/* "<%= media_url %>" */} />
             </div>
           {/* <% end %> */}
         </div>
@@ -34,7 +34,7 @@ export default () => {
           <div className="retweeter">
             <span className="rtby">RTby</span>
             <span className="icon">
-              <img src="<%= tweet[:retweeter][:user][:icon] %>" />
+              <img src={""/* "<%= tweet[:retweeter][:user][:icon] %>" */} />
             </span>
             <span className="name">
               {/* <%= tweet[:retweeter][:user][:name] %> */}
