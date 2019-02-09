@@ -7,22 +7,36 @@ html, body {
 
 nav {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   font-size: 14px;
   background: #0d2553;
   padding: 4px 7px;
   box-sizing: border-box;
 
-  > a {
-    display: inline-block;
+  > div {
     flex: 0 1 auto;
-    color: #c7cad1;
-    margin-right: 15px;
+    display: flex;
+    align-items: center;
 
-    &.home {
-      font-weight: bold;
-      text-decoration: none;
+    &.links {
+      justify-content: flex-start;
+    }
+
+    &.buttons {
+      justify-content: flex-end;
+    }
+
+    > a {
+      display: inline-block;
+      flex: 0 1 auto;
+      color: #c7cad1;
+      margin-right: 15px;
+
+      &.home {
+        font-weight: bold;
+        text-decoration: none;
+      }
     }
   }
 }
