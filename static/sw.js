@@ -2,8 +2,7 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open('v1').then(cache => {
       return cache.addAll([
-        '/js/index.js',
-        '/css/index.css',
+        '/bundle.js',
         '/images/icon.png',
         '/favicon.ico',
       ]);
@@ -12,6 +11,7 @@ self.addEventListener('install', e => {
 });
 
 self.addEventListener('fetch', e => {
+  // console.log(e);
   if (/^https:\/\/[^\/]*twitter.com/.test(e.request)) {
     return;
   }
