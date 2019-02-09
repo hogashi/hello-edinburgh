@@ -10,14 +10,14 @@ nav {
   justify-content: flex-start;
   align-items: center;
   font-size: 14px;
-  background: #494949;
+  background: #0d2553;
   padding: 4px 7px;
   box-sizing: border-box;
 
   > a {
     display: inline-block;
     flex: 0 1 auto;
-    color: #b1b6bc;
+    color: #c7cad1;
     margin-right: 15px;
 
     &.home {
@@ -46,7 +46,7 @@ nav {
     justify-content: flex-start;
     align-items: flex-start;
     border-top: 1px solid #cccccc;
-    font-size: 16px;
+    font-size: 14px;
 
     > .icon {
       flex: 0 1 auto;
@@ -70,6 +70,7 @@ nav {
 
           > span {
             margin-right: 2px;
+            white-space: pre-wrap;
 
             &.name {
               color: #303030;
@@ -89,6 +90,7 @@ nav {
         &.text {
           padding: 3px 0;
           box-sizing: border-box;
+          white-space: pre-wrap;
         }
 
         &.media {
@@ -116,6 +118,7 @@ nav {
 
         > span {
           margin-left: 2px;
+          white-space: pre-wrap;
 
           &.rtby {
             color: #707070;

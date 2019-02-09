@@ -64,7 +64,7 @@ class Edinburgh < Sinatra::Base
       formatted[:retweeter] = retweeter
       p tweet.attrs
       p "full: '#{tweet.attrs[:full_text]}'"
-      text = tweet.attrs[:full_text].gsub(/\n/, '<br>')
+      text = tweet.attrs[:full_text]
       tweet.uris.each do |u|
         text = text.gsub(u.uri.to_s, "<a target=\"_blank\" href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
       end
@@ -81,17 +81,11 @@ class Edinburgh < Sinatra::Base
   end
 
   before do
-    #p '--------------------'
-    #p session[:client]
-    #p logged_in?
-    #p request.path_info
-    #p request.path_info.match? /^\/auth/
-
-    #unless request.path_info.match? /^\/auth/
-    #  unless logged_in?
-    #    redirect to('/auth/twitter')
-    #  end
-    #end
+    #p settings.production?
+    #p request.secure?
+    if settings.production? && !request.secure?
+      redirect to(request.url.gsub(/^http/, 'https'))
+    end
   end
 
   get '/auth/twitter/callback' do

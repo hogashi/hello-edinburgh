@@ -1,0 +1,13 @@
+{
+  "name": "Edinburgh",
+  "short_name": "Edinburgh",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color" : "#FFFFFF",
+  "theme_color": "#0D2553",
+  "icons": [{
+    "src": "images/icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}

@@ -6,13 +6,15 @@
   "author": "hogashi <i1511015@edu.cc.uec.ac.jp>",
   "license": "MIT",
   "scripts": {
-    "build-dev": "run-p build:js-dev build:css",
-    "build": "run-p build:js build:css",
-    "heroku-postbuild": "run-p build:js build:css",
+    "build-dev": "run-p build:js-dev build:css copy",
+    "build": "run-p build:js build:css copy",
+    "heroku-postbuild": "run-p build:js build:css copy",
     "build:js-dev": "webpack --mode development --config webpack.config.js",
     "build:js": "webpack --config webpack.config.js",
     "build:css": "node-sass src/index.scss public/css/index.css",
-    "watch": "webpack --mode development --config webpack.config.js --watch"
+    "copy": "mkdir -p public && cp -rf static/* public/",
+    "watch": "webpack --mode development --config webpack.config.js --watch",
+    "clean": "rm -rf public"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
