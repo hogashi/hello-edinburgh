@@ -1,6 +1,5 @@
 <div id="timeline">
-  <p>sec: <span id="timer">0</span></p>
-  <a id="clearButton" href="#">clear</a>
+  <p id="indicator"><span>sec: <span id="timer">0</span></span><button id="clearButton">clear</button></p>
   <% if logged_in? %>
     <div id="tweets"></div>
     <p id="message"><%= @message %></p>

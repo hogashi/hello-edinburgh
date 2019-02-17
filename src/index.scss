@@ -37,6 +37,16 @@ nav {
   }
 }
 
+#indicator {
+  display: flex;
+  justify-content: space-between;
+
+  > span, button {
+    display: inline-block;
+    flex: 0 1 auto;
+  }
+}
+
 #tweets {
   width: 100%;
 
