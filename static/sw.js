@@ -25,7 +25,7 @@ self.addEventListener('fetch', e => {
 });
 
 self.addEventListener('activate', e => {
-  event.waitUntil(
+  e.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
