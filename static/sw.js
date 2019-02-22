@@ -1,6 +1,8 @@
+const VERSION = '201902221345';
+
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('v1').then(cache => {
+    caches.open(VERSION).then(cache => {
       return cache.addAll([
         '/js/index.js',
         '/css/index.css',
@@ -18,6 +20,20 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     caches.match(e.request).then(res => {
       return res || fetch(e.request);
+    })
+  );
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== VERSION) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
 });
