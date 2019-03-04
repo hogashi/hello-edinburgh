@@ -6,6 +6,7 @@ require 'dotenv'
 
 require 'json'
 require 'sinatra/base'
+require "sinatra/json"
 require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
 
@@ -186,7 +187,7 @@ class Edinburgh < Sinatra::Base
       format_tweet(tweet)
     end
 
-    erb :tweets, :layout => false
+    json @tweets
   end
 
   # TODO, post にしたい
