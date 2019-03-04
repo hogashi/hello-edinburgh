@@ -6,6 +6,7 @@ require 'dotenv'
 
 require 'json'
 require 'sinatra/base'
+require "sinatra/json"
 require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
 
@@ -21,6 +22,9 @@ class Edinburgh < Sinatra::Base
 
   configure do
     enable :sessions
+    use Rack::Session::Cookie, :key => 'rack.session',
+                               :expire_after => 60 * 60 * 24 * 30,
+                               :secret => Digest::SHA256.hexdigest(rand.to_s)
 
     mime_type :js, 'text/javascript'
     mime_type :css, 'text/css'
@@ -183,7 +187,7 @@ class Edinburgh < Sinatra::Base
       format_tweet(tweet)
     end
 
-    erb :tweets, :layout => false
+    json @tweets
   end
 
   # TODO, post にしたい

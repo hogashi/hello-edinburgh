@@ -2,7 +2,7 @@ html, body {
   width: 100%;
   margin: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Roboto", "Meiryo", "Noto Sans CJK JP", sans-serif;
 }
 
 nav {
@@ -51,6 +51,16 @@ nav {
   }
 }
 
+#indicator {
+  display: flex;
+  justify-content: space-between;
+
+  > span, button {
+    display: inline-block;
+    flex: 0 1 auto;
+  }
+}
+
 #tweets {
   width: 100%;
 
@@ -85,6 +95,7 @@ nav {
           > span {
             margin-right: 2px;
             white-space: pre-wrap;
+            overflow-wrap: break-word;
 
             &.name {
               color: #303030;
@@ -105,6 +116,7 @@ nav {
           padding: 3px 0;
           box-sizing: border-box;
           white-space: pre-wrap;
+          overflow-wrap: break-word;
         }
 
         &.media {
@@ -133,6 +145,7 @@ nav {
         > span {
           margin-left: 2px;
           white-space: pre-wrap;
+          overflow-wrap: break-word;
 
           &.rtby {
             color: #707070;

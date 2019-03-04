@@ -21,8 +21,10 @@ const goButton = document.querySelector('#goButton');
 const message  = document.querySelector('#message');
 
 // timeline
+const timeline = document.querySelector('#timeline');
 const tweetsContainer = document.querySelector('#tweets');
 const timer = document.querySelector('#timer');
+const clearButton = document.querySelector('#clearButton');
 
 const loadTimeline = () => {
   let sinceId = 0;
@@ -85,8 +87,12 @@ switch (window.location.pathname) {
         timer.innerText = count;
       }, 1 * 1000);
     });
+    clearButton.addEventListener('click', e => {
+      Array.from(tweetsContainer.children).slice(1).forEach(child => tweetsContainer.removeChild(child));
+    });
     break;
   default:
     console.log("default");
     break;
 };
+
