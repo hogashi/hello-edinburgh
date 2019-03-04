@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:hogashi/hello-edinburgh.git",
-  "author": "hogashi <i1511015@edu.cc.uec.ac.jp>",
+  "author": "hogashi <hogextend@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build-dev": "run-p build:js-dev copy",
