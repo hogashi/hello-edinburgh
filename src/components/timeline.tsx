@@ -58,7 +58,7 @@ export default () => {
       }, 1000));
     }
     return () => clearTimeout(timer);
-  }, [second]);
+  }, [second, isActive]);
 
   return (
     <div id="timeline">
