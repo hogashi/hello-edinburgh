@@ -1,6 +1,7 @@
+const VERSION = '201903050306';
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('v1').then(cache => {
+    caches.open(VERSION).then(cache => {
       return cache.addAll([
         '/bundle.js',
         '/images/icon.png',
