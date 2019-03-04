@@ -5,7 +5,6 @@ export default () => {
     <nav>
       <div>
         <a href="/" className="home">Edinburgh</a>
-        <a href="/timeline" className="timeline">timeline</a>
       </div>
       <div>
         <a href="/auth/twitter">login</a>
