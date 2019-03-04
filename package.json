@@ -8,7 +8,7 @@
   "scripts": {
     "build-dev": "run-p build:js-dev copy",
     "build": "run-p build:js copy",
-    "heroku-postbuild": "run-p build:js copy",
+    "heroku-postbuild": "run-s build",
     "build:js-dev": "webpack --mode development --config webpack.config.js",
     "build:js": "webpack --mode production --config webpack.config.js",
     "build:css": "node-sass src/index.scss public/css/index.css",

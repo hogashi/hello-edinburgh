@@ -21,6 +21,9 @@ class Edinburgh < Sinatra::Base
 
   configure do
     enable :sessions
+    use Rack::Session::Cookie, :key => 'rack.session',
+                               :expire_after => 60 * 60 * 24 * 30,
+                               :secret => Digest::SHA256.hexdigest(rand.to_s)
 
     mime_type :js, 'text/javascript'
     mime_type :css, 'text/css'
