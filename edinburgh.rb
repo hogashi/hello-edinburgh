@@ -44,7 +44,7 @@ class Edinburgh < Sinatra::Base
     def format_tweet_base(tweet)
       user = tweet.user
       formatted_base = {
-        :id => tweet.id,
+        :id => tweet.id.to_s,
         :tweet_url => tweet.uri.to_s,
         :created_at => tweet.created_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S"),
         :user => {
@@ -201,7 +201,7 @@ class Edinburgh < Sinatra::Base
     #p opts
     begin
       res = client.update(text, opts)
-      @message = "ok: #{res.id}"
+      @message = "ok: #{res.id.to_s}"
     rescue
       @message = "ng"
     end
