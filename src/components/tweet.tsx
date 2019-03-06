@@ -15,7 +15,7 @@ const renderRetweeter = (retweeter: ITweet | undefined) => {
         <img src={icon} />
       </span>
       <span className="name">{name}</span>
-      <span className="screenName">{screen_name}</span>
+      <span className="screenName">@{screen_name}</span>
       <span className="created_at">
         <a target="_blank" href={tweet_url}>{created_at}</a>
       </span>
@@ -36,7 +36,7 @@ export default (props: ITweet) => {
       <div className="contents">
         <div className="user">
           <span className="name">{name}</span>
-          <span className="screenName">{screen_name}</span>
+          <span className="screenName">@{screen_name}</span>
           <span className="createdAt">
             <a target="_blank" href={tweet_url}>{created_at}</a>
           </span>
