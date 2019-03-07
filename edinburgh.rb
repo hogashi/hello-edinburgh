@@ -68,17 +68,23 @@ class Edinburgh < Sinatra::Base
       formatted[:retweeter] = retweeter
       p tweet.attrs
       p "full: '#{tweet.attrs[:full_text]}'"
-      text = tweet.attrs[:full_text]
+      formatted[:text] = tweet.attrs[:full_text]
+      formatted[:urls] = []
       tweet.uris.each do |u|
-        text = text.gsub(u.uri.to_s, "<a target=\"_blank\" href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
+        formatted[:urls].push({
+          :url => u.uri.to_s,
+          :expanded_url => u.expanded_uri.to_s,
+          :display_url => u.display_uri.to_s,
+        })
       end
-      media_urls = []
+      formatted[:media_urls] = []
       tweet.media.each do |m, i|
-        media_urls.push(m.media_url_https.to_s)
-        text = text.gsub(m.uri.to_s, "<a target=\"_blank\" href=\"#{m.media_url_https.to_s}\">#{m.display_uri.to_s}</a>")
+        formatted[:media_urls].push({
+          :url => m.uri.to_s,
+          :media_url => m.media_url_https.to_s,
+          :display_uri => m.display_uri.to_s,
+        })
       end
-      formatted[:text] = text
-      formatted[:media_urls] = media_urls
       p formatted
       return formatted
     end
