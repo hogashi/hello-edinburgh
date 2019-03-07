@@ -56,18 +56,18 @@ class Edinburgh < Sinatra::Base
       return formatted_base
     end
     def format_tweet(tweet)
-      p '----------'
+      # p '----------'
       retweeted_status = tweet.retweeted_status
       if retweeted_status.is_a? Twitter::Tweet
-        p tweet
-        p retweeted_status
+        # p tweet
+        # p retweeted_status
         retweeter = format_tweet_base(tweet)
         tweet = retweeted_status
       end
       formatted = format_tweet_base(tweet)
       formatted[:retweeter] = retweeter
-      p tweet.attrs
-      p "full: '#{tweet.attrs[:full_text]}'"
+      # p tweet.attrs
+      # p "full: '#{tweet.attrs[:full_text]}'"
       formatted[:text] = tweet.attrs[:full_text]
       formatted[:urls] = []
       tweet.uris.each do |u|
@@ -87,7 +87,7 @@ class Edinburgh < Sinatra::Base
           :actual_url => m.media_url_https.to_s
         })
       end
-      p formatted
+      # p formatted
       return formatted
     end
   end
@@ -166,7 +166,7 @@ class Edinburgh < Sinatra::Base
   get '/api/home_timeline' do
     return 401 unless logged_in?
 
-    p params
+    # p params
     # TODO, add count-number setting
     opts = {
       :count => 60,
@@ -176,18 +176,18 @@ class Edinburgh < Sinatra::Base
         :since_id => params[:since_id].to_i,
       }
     end
-    p opts
+    # p opts
 
     client = session[:client]
     begin
       tweets = client.home_timeline(opts)
     rescue => evar
-      p evar
-      p evar.code
-      p evar.message
-      p evar.rate_limit
+      # p evar
+      # p evar.code
+      # p evar.message
+      # p evar.rate_limit
       reset_at = evar.rate_limit.reset_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S")
-      p reset_at
+      # p reset_at
       return 400, "#{evar.code}, #{evar.message}, reset at: #{reset_at}"
     end
 
@@ -200,7 +200,7 @@ class Edinburgh < Sinatra::Base
 
   # TODO, post にしたい
   get '/api/tweet' do
-    p params
+    # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
     text = params[:text]
     client = session[:client]
