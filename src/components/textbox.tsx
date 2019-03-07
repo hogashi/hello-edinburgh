@@ -50,6 +50,9 @@ export default ({ setMessage }: IProps) => {
         setText("");
       }
       setMessage(res.data);
+      setTimeout(() => {
+        setMessage('');
+      }, 3 * 1000);
     })
     .catch((err) => {
       console.log(err);
