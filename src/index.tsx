@@ -8,10 +8,12 @@ import * as serviceWorker from "./serviceWorker";
 import "./index.scss";
 
 export const App = () => {
+  const [message, setMessage] = React.useState('');
+
   return (
     <div>
-      <Navbar />
-      <Textbox />
+      <Navbar message={message} />
+      <Textbox setMessage={setMessage} />
       <Timeline />
     </div>
   );

@@ -1,3 +1,10 @@
+$textbox-font-size: 14px;
+$textbox-line-height: 1.4em;
+$textbox-line-height-raw: 1.4;
+$textbox-padding-top-bottom: 3px;
+// 2lines + top-bottom padding/border
+$textbox-min-height: calc( #{$textbox-font-size} * #{$textbox-line-height-raw} * 2 + #{$textbox-padding-top-bottom} * 2 + 1px * 2 );
+
 html, body {
   width: 100%;
   margin: 0;
@@ -19,12 +26,8 @@ nav {
     display: flex;
     align-items: center;
 
-    &.links {
-      justify-content: flex-start;
-    }
-
-    &.buttons {
-      justify-content: flex-end;
+    &#message {
+      color: #c7cad1;
     }
 
     > a {
@@ -41,9 +44,37 @@ nav {
   }
 }
 
+#textBox {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 3px 3px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  #text {
+    flex: 1 1 auto;
+    padding: $textbox-padding-top-bottom 5px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-size: $textbox-font-size;
+    line-height: $textbox-line-height;
+    min-height: $textbox-min-height;
+  }
+
+  > button {
+    flex: 0 1 40px;
+    height: 30px;
+    margin-left: 3px;
+  }
+}
+
 #timeline {
   width: 100%;
-  padding: 0 3px;
+  padding: 0 3px $textbox-min-height;
   box-sizing: border-box;
 
   > p {
