@@ -51,9 +51,8 @@ export default () => {
       />
       <button
         id="goButton"
-        onClick={doTweet}>
-        Tw
-      </button>
+        onClick={doTweet}
+      >Tw</button>
       <p id="message">{message}</p>
     </div>
   );

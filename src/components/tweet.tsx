@@ -5,7 +5,7 @@ const renderRetweeter = (retweeter: ITweet | undefined) => {
     return null;
   }
 
-  const { id, tweet_url, created_at, user } = retweeter;
+  const { tweet_url, created_at, user } = retweeter;
   const { icon, name, screen_name } = user;
 
   return (
@@ -23,24 +23,45 @@ const renderRetweeter = (retweeter: ITweet | undefined) => {
   );
 };
 
-const replaceUrlToA = (text, urls) => {
-  const contents = [];
-  urls.reduce((restText, url) => {
-    const { short_url, actual_url, display_url } = url;
-    const [head, tail] = text.split(short_url);
-    contents.push(head);
-    contents.push(
-      <a target="_blank" href={actual_url}">{display_uri}</a>
-    );
-    return tail;
-  });
+const renderContent = (text: string, urls: IUrl[]) => {
+  const contents: Array<string | JSX.Element> = [];
+  contents.push(
+    urls.reduce((rest, url) => {
+      const { short_url, expanded_url, display_url } = url;
+      if (rest.indexOf(short_url) === -1) {
+        return rest;
+      }
+      const [head, tail] = rest.split(short_url);
+      contents.push(head);
+      contents.push(
+        <a
+          target="_blank"
+          href={expanded_url}
+          key={`link-${encodeURIComponent(expanded_url)}`}
+        >{display_url}</a>
+      );
+      return tail;
+    }, text)
+  );
+  return <div className="text">{contents}</div>;
+};
+
+const renderMedia = (media_urls: IUrl[]) => {
+  const media = media_urls.map((media_url) => (
+    <div className="medium" key={`media-${encodeURIComponent(media_url.actual_url)}`}>
+      <img src={media_url.actual_url} />
+    </div>
+  ));
+  return <div className="media">{media}</div>;
 };
 
 export default (props: ITweet) => {
   const { id, text, tweet_url, created_at, user, retweeter, urls, media_urls } = props;
   const { icon, name, screen_name } = user;
 
-  const content = replaceUrlToA(text, urls);
+  if (media_urls.length) {
+    urls.push(media_urls[0]);
+  }
 
   return (
     <div className="tweet" data-id={retweeter ? retweeter.id : id}>
@@ -55,14 +76,8 @@ export default (props: ITweet) => {
             <a target="_blank" href={tweet_url}>{created_at}</a>
           </span>
         </div>
-        <div className="text">{content}</div>
-        <div className="media">
-          {media_urls.map((media_url) =>
-            <div className="medium">
-              <img src={media_url} />
-            </div>
-          )}
-        </div>
+        {renderContent(text, urls)}
+        {renderMedia(media_urls)}
         {renderRetweeter(retweeter)}
       </div>
     </div>

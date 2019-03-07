@@ -72,17 +72,19 @@ class Edinburgh < Sinatra::Base
       formatted[:urls] = []
       tweet.uris.each do |u|
         formatted[:urls].push({
-          :url => u.uri.to_s,
+          :short_url => u.uri.to_s,
           :expanded_url => u.expanded_uri.to_s,
           :display_url => u.display_uri.to_s,
+          :actual_url => u.expanded_uri.to_s,
         })
       end
       formatted[:media_urls] = []
       tweet.media.each do |m, i|
         formatted[:media_urls].push({
-          :url => m.uri.to_s,
-          :media_url => m.media_url_https.to_s,
-          :display_uri => m.display_uri.to_s,
+          :short_url => m.url.to_s,
+          :expanded_url => m.expanded_url.to_s,
+          :display_url => m.display_url.to_s,
+          :actual_url => m.media_url_https.to_s
         })
       end
       p formatted
