@@ -16,7 +16,7 @@ const renderRetweeter = (retweeter: ITweet | undefined) => {
       </span>
       <span className='name'>{name}</span>
       <span className='screenName'>@{screen_name}</span>
-      <span className='created_at'>
+      <span className='createdAt'>
         <a target='_blank' href={tweet_url}>{created_at}</a>
       </span>
     </div>
