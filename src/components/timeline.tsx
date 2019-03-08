@@ -15,7 +15,7 @@ const loadTimeline = (sinceId: number) => {
     return res.data as ITweet[];
   })
   .catch((err) => {
-    console.log(err, err.response, err.response!.data);
+    console.log(err, err.response, err.response ? err.response.data : '');
     return [] as ITweet[];
   });
 };
