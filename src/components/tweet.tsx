@@ -23,6 +23,16 @@ const renderRetweeter = (retweeter: ITweet | undefined) => {
   );
 };
 
+const getRaw = (text: string): string => {
+  return [
+    { re: /&apos;/g, str: '\'' },
+    { re: /&quot;/g, str: '"' },
+    { re: /&gt;/g,   str: '>' },
+    { re: /&lt;/g,   str: '<' },
+    { re: /&amp;/g,  str: '&' },
+  ].reduce((t, { re, str }) => t.replace(re, str), text);
+};
+
 const renderContent = (text: string, urls: IUrl[]) => {
   const contents: Array<string | JSX.Element> = [];
   contents.push(
@@ -41,7 +51,7 @@ const renderContent = (text: string, urls: IUrl[]) => {
         >{display_url}</a>
       );
       return tail;
-    }, text)
+    }, getRaw(text))
   );
   return <div className="text">{contents}</div>;
 };
