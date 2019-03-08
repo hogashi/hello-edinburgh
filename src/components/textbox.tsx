@@ -59,6 +59,12 @@ export default ({ setMessage }: IProps) => {
     });
   }, [text]);
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+      doTweet();
+    }
+  };
+
   // if (!loggedIn) {
   //   return (
   //     <div>
@@ -77,6 +83,7 @@ export default ({ setMessage }: IProps) => {
         placeholder={placeholder}
         value={text}
         onChange={(e) => onTextChange(e.target.value)}
+        onKeyDown={(e) => onKeyDown(e)}
       />
       <button
         id="goButton"
