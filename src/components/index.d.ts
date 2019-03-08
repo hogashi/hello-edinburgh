@@ -20,4 +20,5 @@ interface ITweet {
   urls: IUrl[];
   media_urls: IUrl[];
   retweeter?: ITweet;
+  time?: number;
 }

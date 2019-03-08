@@ -4,19 +4,29 @@ import Tweet from './tweet';
 
 const { useState, useEffect } = React;
 
-const loadTimeline = (sinceId: number) => {
+const loadTimeline = (sinceId: number): Promise<{ time: number, tweets: ITweet[] }> => {
   console.log(`loading timeline, sinceId: ${sinceId}`);
+  const time = new Date().getTime();
   return Axios.get(`/api/home_timeline?since_id=${sinceId || ''}`)
   .then((res) => {
     console.log(res);
     if (!res) {
-      return [] as ITweet[];
+      return {
+        time,
+        tweets: [] as ITweet[],
+      };
     }
-    return res.data as ITweet[];
+    return {
+      time,
+      tweets: res.data as ITweet[],
+    };
   })
   .catch((err) => {
     console.log(err, err.response, err.response ? err.response.data : '');
-    return [] as ITweet[];
+    return {
+      time,
+      tweets: [] as ITweet[],
+    };
   });
 };
 
@@ -27,9 +37,8 @@ export default () => {
   const [timer, setTimer] = useState(setTimeout(() => null, 1));
 
   const renderTweets = (): JSX.Element[] => {
-    const time = new Date().getTime();
     return tweets.map((tweet) => {
-      return <Tweet key={`${tweet.id}-${time}`} {...tweet} />;
+      return <Tweet key={`${tweet.id}-${tweet.time}`} {...tweet} />;
     });
   };
 
@@ -51,7 +60,12 @@ export default () => {
             return newSec;
           }
           const sinceId = tweets[0] ? tweets[0].id : 0;
-          loadTimeline(sinceId).then((newTweets: ITweet[]) => {
+          loadTimeline(sinceId).then((res) => {
+            const time = res.time;
+            const newTweets = res.tweets.map((newTweet) => {
+              newTweet.time = time;
+              return newTweet;
+            });
             setTweets([...newTweets, ...tweets]);
           });
           return 60;
