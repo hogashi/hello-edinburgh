@@ -89,12 +89,14 @@ export default ({ setMessage }: IProps) => {
         value={text}
         disabled={disabled}
         onChange={(e) => onTextChange(e.target.value)}
-        onKeyDown={(e) => onKeyDown(e)}
+        onKeyDown={onKeyDown}
       />
       <button
         id='goButton'
         onClick={doTweet}
-      >Tw</button>
+      >
+        Tw
+      </button>
     </div>
   );
 };

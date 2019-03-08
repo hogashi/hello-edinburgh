@@ -35,24 +35,26 @@ const getRaw = (text: string): string => {
 
 const renderContent = (text: string, urls: IUrl[]) => {
   const contents: Array<string | JSX.Element> = [];
-  contents.push(
-    urls.reduce((rest, url) => {
-      const { short_url, expanded_url, display_url } = url;
-      if (rest.indexOf(short_url) === -1) {
-        return rest;
-      }
-      const [head, tail] = rest.split(short_url);
-      contents.push(head);
-      contents.push(
-        <a
-          target='_blank'
-          href={expanded_url}
-          key={`link-${encodeURIComponent(expanded_url)}`}
-        >{display_url}</a>
-      );
-      return tail;
-    }, getRaw(text))
-  );
+  const restText = urls.reduce((rest, url) => {
+    const { short_url, expanded_url, display_url } = url;
+    if (rest.indexOf(short_url) === -1) {
+      return rest;
+    }
+    const [head, tail] = rest.split(short_url);
+    contents.push(head);
+    contents.push(
+      <a
+        target='_blank'
+        href={expanded_url}
+        key={`link-${encodeURIComponent(expanded_url)}`}
+      >
+        {display_url}
+      </a>,
+    );
+    return tail;
+  }, getRaw(text));
+  contents.push(restText);
+
   return <div className='text'>{contents}</div>;
 };
 

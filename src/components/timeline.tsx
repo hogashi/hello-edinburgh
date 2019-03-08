@@ -24,7 +24,7 @@ export default () => {
   const [isActive, setIsActive] = useState(true);
   const [second, setSecond] = useState(0);
   const [tweets, setTweets] = useState([] as ITweet[]);
-  const [timer, setTimer] = useState(setTimeout(() => {}, 1));
+  const [timer, setTimer] = useState(setTimeout(() => null, 1));
 
   const renderTweets = (): JSX.Element[] => {
     const time = new Date().getTime();
