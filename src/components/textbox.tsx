@@ -25,6 +25,7 @@ export default ({ setMessage }: IProps) => {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [text, setText] = useState("");
   const [height, setHeight] = useState(calcHeight(1));
+  const [disabled, setDisabled] = useState(false);
 
   const onTextChange = useCallback((newText: string) => {
     setText(newText);
@@ -38,6 +39,7 @@ export default ({ setMessage }: IProps) => {
     if (!text.trim().length) {
       return;
     }
+    setDisabled(true);
     const encodedText = encodeURIComponent(text.trim());
     // Axios.post('/tweet', {
     //   hoge: 123,
@@ -56,6 +58,9 @@ export default ({ setMessage }: IProps) => {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setDisabled(false);
     });
   }, [text]);
 
@@ -82,6 +87,7 @@ export default ({ setMessage }: IProps) => {
         style={{ height }}
         placeholder={placeholder}
         value={text}
+        disabled={disabled}
         onChange={(e) => onTextChange(e.target.value)}
         onKeyDown={(e) => onKeyDown(e)}
       />

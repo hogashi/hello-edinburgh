@@ -27,8 +27,9 @@ export default () => {
   const [timer, setTimer] = useState(setTimeout(() => {}, 1));
 
   const renderTweets = (): JSX.Element[] => {
+    const time = new Date().getTime();
     return tweets.map((tweet) => {
-      return <Tweet key={tweet.id} {...tweet} />;
+      return <Tweet key={`${tweet.id}-${time}`} {...tweet} />;
     });
   };
 
