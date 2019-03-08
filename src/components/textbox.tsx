@@ -1,5 +1,5 @@
-import Axios from "axios";
-import * as React from "react";
+import Axios from 'axios';
+import * as React from 'react';
 
 const { useState, useMemo, useCallback } = React;
 
@@ -23,7 +23,7 @@ interface IProps {
 
 export default ({ setMessage }: IProps) => {
   // const [loggedIn, setLoggedIn] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [height, setHeight] = useState(calcHeight(1));
   const [disabled, setDisabled] = useState(false);
 
@@ -48,8 +48,8 @@ export default ({ setMessage }: IProps) => {
     Axios.get(`/api/tweet?text=${encodedText}`)
     .then((res) => {
       console.log(res);
-      if (res.data !== "ng") {
-        setText("");
+      if (res.data !== 'ng') {
+        setText('');
       }
       setMessage(res.data);
       setTimeout(() => {
@@ -73,17 +73,17 @@ export default ({ setMessage }: IProps) => {
   // if (!loggedIn) {
   //   return (
   //     <div>
-  //       <a href="/auth/twitter">login</a>
+  //       <a href='/auth/twitter'>login</a>
   //     </div>
   //   );
   // }
 
-  const placeholder = "geo info \"from Edinburgh, Scotland, United Kingdom\" goes with";
+  const placeholder = 'geo info "from Edinburgh, Scotland, United Kingdom" goes with';
 
   return (
-    <div id="textBox">
+    <div id='textBox'>
       <textarea
-        id="text"
+        id='text'
         style={{ height }}
         placeholder={placeholder}
         value={text}
@@ -92,7 +92,7 @@ export default ({ setMessage }: IProps) => {
         onKeyDown={(e) => onKeyDown(e)}
       />
       <button
-        id="goButton"
+        id='goButton'
         onClick={doTweet}
       >Tw</button>
     </div>

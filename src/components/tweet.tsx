@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 const renderRetweeter = (retweeter: ITweet | undefined) => {
   if (!retweeter) {
@@ -9,15 +9,15 @@ const renderRetweeter = (retweeter: ITweet | undefined) => {
   const { icon, name, screen_name } = user;
 
   return (
-    <div className="retweeter">
-      <span className="rtby">RTby</span>
-      <span className="icon">
+    <div className='retweeter'>
+      <span className='rtby'>RTby</span>
+      <span className='icon'>
         <img src={icon} />
       </span>
-      <span className="name">{name}</span>
-      <span className="screenName">@{screen_name}</span>
-      <span className="created_at">
-        <a target="_blank" href={tweet_url}>{created_at}</a>
+      <span className='name'>{name}</span>
+      <span className='screenName'>@{screen_name}</span>
+      <span className='created_at'>
+        <a target='_blank' href={tweet_url}>{created_at}</a>
       </span>
     </div>
   );
@@ -45,7 +45,7 @@ const renderContent = (text: string, urls: IUrl[]) => {
       contents.push(head);
       contents.push(
         <a
-          target="_blank"
+          target='_blank'
           href={expanded_url}
           key={`link-${encodeURIComponent(expanded_url)}`}
         >{display_url}</a>
@@ -53,16 +53,16 @@ const renderContent = (text: string, urls: IUrl[]) => {
       return tail;
     }, getRaw(text))
   );
-  return <div className="text">{contents}</div>;
+  return <div className='text'>{contents}</div>;
 };
 
 const renderMedia = (media_urls: IUrl[]) => {
   const media = media_urls.map((media_url) => (
-    <div className="medium" key={`media-${encodeURIComponent(media_url.actual_url)}`}>
+    <div className='medium' key={`media-${encodeURIComponent(media_url.actual_url)}`}>
       <img src={media_url.actual_url} />
     </div>
   ));
-  return <div className="media">{media}</div>;
+  return <div className='media'>{media}</div>;
 };
 
 export default (props: ITweet) => {
@@ -74,16 +74,16 @@ export default (props: ITweet) => {
   }
 
   return (
-    <div className="tweet" data-id={retweeter ? retweeter.id : id}>
-      <div className="icon">
+    <div className='tweet' data-id={retweeter ? retweeter.id : id}>
+      <div className='icon'>
         <img src={icon} />
       </div>
-      <div className="contents">
-        <div className="user">
-          <span className="name">{name}</span>
-          <span className="screenName">@{screen_name}</span>
-          <span className="createdAt">
-            <a target="_blank" href={tweet_url}>{created_at}</a>
+      <div className='contents'>
+        <div className='user'>
+          <span className='name'>{name}</span>
+          <span className='screenName'>@{screen_name}</span>
+          <span className='createdAt'>
+            <a target='_blank' href={tweet_url}>{created_at}</a>
           </span>
         </div>
         {renderContent(text, urls)}

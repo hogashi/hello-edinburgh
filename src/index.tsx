@@ -1,11 +1,11 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import Navbar from "./components/navbar";
-import Textbox from "./components/textbox";
-import Timeline from "./components/timeline";
-import * as serviceWorker from "./serviceWorker";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import Navbar from './components/navbar';
+import Textbox from './components/textbox';
+import Timeline from './components/timeline';
+import * as serviceWorker from './serviceWorker';
 
-import "./index.scss";
+import './index.scss';
 
 export const App = () => {
   const [message, setMessage] = React.useState('');
@@ -19,7 +19,7 @@ export const App = () => {
   );
 };
 
-const appElement = document.getElementById("app");
+const appElement = document.getElementById('app');
 ReactDOM.render(<App />, appElement);
 
 serviceWorker.register();

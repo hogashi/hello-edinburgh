@@ -62,10 +62,10 @@ export default () => {
   }, [second, isActive]);
 
   return (
-    <div id="timeline">
-      <p>reload in: <span id="second">{second}</span></p>
+    <div id='timeline'>
+      <p>reload in: <span id='second'>{second}</span></p>
       <button onClick={toggleTimer}>toggle</button>
-      <div id="tweets">
+      <div id='tweets'>
         {renderTweets()}
       </div>
     </div>
