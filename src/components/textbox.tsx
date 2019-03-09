@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import * as React from 'react';
 
-const { useState, useMemo, useCallback } = React;
+const { useState, useCallback } = React;
 
 const LINE_HEIGHT_EM = 1.4;
 const PADDING_TOP_BOTTOM_PX = 3;
