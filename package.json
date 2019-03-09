@@ -15,7 +15,7 @@
     "copy": "mkdir -p public && cp -rf static/* public/",
     "watch": "webpack --mode development --config webpack.config.js --watch",
     "clean": "rm -rf public",
-    "lint": "tslint -c tslint.json src/**/*.tsx"
+    "lint": "tslint -c tslint.json src/**/*.ts{,x}"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
