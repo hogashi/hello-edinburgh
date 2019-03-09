@@ -63,7 +63,7 @@ export default () => {
       });
     }, 1000);
     return () => clearTimeout(timer);
-  }, [isActive]);
+  }, [tweets, isActive]);
 
   return (
     <div id='timeline'>
