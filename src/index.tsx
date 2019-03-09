@@ -7,8 +7,10 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
 
+const { useState } = React;
+
 export const App = () => {
-  const [message, setMessage] = React.useState('');
+  const [message, setMessage] = useState('');
 
   return (
     <div>
