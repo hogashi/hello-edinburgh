@@ -55,10 +55,6 @@ export default () => {
     if (isActive) {
       setTimer(setTimeout(() => {
         setSecond((sec) => {
-          const newSec = sec - 1;
-          if (newSec >= 0) {
-            return newSec;
-          }
           const sinceId = tweets[0] ? tweets[0].id : 0;
           loadTimeline(sinceId).then((res) => {
             const time = res.time;
@@ -67,6 +63,9 @@ export default () => {
               return newTweet;
             });
             setTweets([...newTweets, ...tweets]);
+        if (sec > 0) {
+          return sec - 1;
+        }
           });
           return 60;
         });
