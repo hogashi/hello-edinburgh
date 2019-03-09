@@ -34,7 +34,6 @@ export default () => {
   const [isActive, setIsActive] = useState(true);
   const [second, setSecond] = useState(0);
   const [tweets, setTweets] = useState([] as ITweet[]);
-  const [timer, setTimer] = useState(setTimeout(() => null, 1));
 
   const renderTweets = useCallback(() => {
     return tweets.map((tweet) => {
@@ -42,42 +41,34 @@ export default () => {
     });
   }, [tweets]);
 
-  const toggleTimer = useCallback(() => {
-    if (isActive) {
-      clearTimeout(timer);
-      setIsActive(false);
+  useEffect(() => {
+    if (!isActive) {
       return;
     }
-    setIsActive(true);
-  }, [isActive, timer]);
-
-  useEffect(() => {
-    if (isActive) {
-      setTimer(setTimeout(() => {
-        setSecond((sec) => {
-          const sinceId = tweets[0] ? tweets[0].id : 0;
-          loadTimeline(sinceId).then((res) => {
-            const time = res.time;
-            const newTweets = res.tweets.map((newTweet) => {
-              newTweet.time = time;
-              return newTweet;
-            });
-            setTweets([...newTweets, ...tweets]);
+    const timer = setInterval(() => {
+      setSecond((sec) => {
         if (sec > 0) {
           return sec - 1;
         }
+        const sinceId = tweets[0] ? tweets[0].id : 0;
+        loadTimeline(sinceId).then((res) => {
+          const time = res.time;
+          const newTweets = res.tweets.map((newTweet) => {
+            newTweet.time = time;
+            return newTweet;
           });
-          return 60;
+          setTweets([...newTweets, ...tweets]);
         });
-      }, 1000));
-    }
+        return 60;
+      });
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [second, isActive]);
+  }, [isActive]);
 
   return (
     <div id='timeline'>
       <p>reload in: <span id='second'>{second}</span></p>
-      <button onClick={toggleTimer}>toggle</button>
+      <button onClick={() => setIsActive(!isActive)}>toggle</button>
       <div id='tweets'>
         {renderTweets()}
       </div>
