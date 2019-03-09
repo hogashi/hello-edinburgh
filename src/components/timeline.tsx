@@ -2,7 +2,7 @@ import Axios from 'axios';
 import * as React from 'react';
 import Tweet from './tweet';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useCallback } = React;
 
 const loadTimeline = (sinceId: number): Promise<{ time: number, tweets: ITweet[] }> => {
   console.log(`loading timeline, sinceId: ${sinceId}`);
@@ -36,20 +36,20 @@ export default () => {
   const [tweets, setTweets] = useState([] as ITweet[]);
   const [timer, setTimer] = useState(setTimeout(() => null, 1));
 
-  const renderTweets = (): JSX.Element[] => {
+  const renderTweets = useCallback(() => {
     return tweets.map((tweet) => {
       return <Tweet key={`${tweet.id}-${tweet.time}`} {...tweet} />;
     });
-  };
+  }, [tweets]);
 
-  const toggleTimer = () => {
+  const toggleTimer = useCallback(() => {
     if (isActive) {
       clearTimeout(timer);
       setIsActive(false);
       return;
     }
     setIsActive(true);
-  };
+  }, [isActive, timer]);
 
   useEffect(() => {
     if (isActive) {
