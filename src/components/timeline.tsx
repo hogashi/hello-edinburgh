@@ -19,7 +19,7 @@ const loadTimeline = (sinceId: number): Promise<{ time: number, tweets: ITweet[]
     };
   })
   .catch((err) => {
-    console.log(err, err.response, err.response ? err.response.data : '');
+    console.log(err, err.response, err.response ? err.response.data : null);
     return {
       time,
       tweets: [] as ITweet[],
