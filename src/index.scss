@@ -5,11 +5,15 @@ $textbox-padding-top-bottom: 3px;
 // 2lines + top-bottom padding/border
 $textbox-min-height: calc( #{$textbox-font-size} * #{$textbox-line-height-raw} * 2 + #{$textbox-padding-top-bottom} * 2 + 1px * 2 );
 
+$color-theme: #0d2553;
+$color-text-nav: #c7cad1;
+$color-text-rt: #707070;
+
 html, body {
   width: 100%;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Roboto", "Meiryo", "Noto Sans CJK JP", sans-serif;
+  font-family: "Roboto", "Meiryo", "メイリオ", "Noto Sans CJK JP", "Noto Sans Japanese", "Noto Sans", sans-serif;
 }
 
 nav {
@@ -17,7 +21,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  background: #0d2553;
+  background: $color-theme;
   padding: 4px 7px;
   box-sizing: border-box;
 
@@ -27,14 +31,14 @@ nav {
     align-items: center;
 
     &#message {
-      color: #c7cad1;
+      color: $color-text-nav;
       font-size: 0.5em;
     }
 
     > a {
       display: inline-block;
       flex: 0 1 auto;
-      color: #c7cad1;
+      color: $color-text-nav;
       margin-right: 15px;
 
       &.home {
@@ -180,7 +184,7 @@ nav {
           overflow-wrap: break-word;
 
           &.rtby {
-            color: #707070;
+            color: $color-text-rt;
           }
 
           &.icon {
@@ -191,11 +195,11 @@ nav {
           }
 
           &.name {
-            color: #707070;
+            color: $color-text-rt;
           }
 
           &.screenName {
-            color: #707070;
+            color: $color-text-rt;
             font-size: 0.9em;
           }
 
