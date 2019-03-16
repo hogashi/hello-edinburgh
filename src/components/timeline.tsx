@@ -11,10 +11,7 @@ const loadTimeline = (sinceId: number): Promise<{ time: number, tweets: ITweet[]
   .then((res) => {
     console.log(res);
     if (!res) {
-      return {
-        time,
-        tweets: [] as ITweet[],
-      };
+      throw new Error('empty response');
     }
     return {
       time,
