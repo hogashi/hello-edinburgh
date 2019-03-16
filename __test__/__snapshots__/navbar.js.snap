@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar 1`] = `
+<nav>
+  <div>
+    <a
+      className="home"
+      href="/"
+    >
+      Edinburgh
+    </a>
+  </div>
+  <div
+    id="message"
+  >
+    message
+  </div>
+  <div>
+    <a
+      href="/auth/twitter"
+    >
+      login
+    </a>
+    <a
+      href="/logout"
+    >
+      logout
+    </a>
+  </div>
+</nav>
+`;
