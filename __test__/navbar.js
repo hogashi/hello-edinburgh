@@ -10,5 +10,5 @@ test('Navbar', () => {
   );
 
   let tree = component.toJSON();
-  expect(tree).toMatchSnapShot();
+  expect(tree).toMatchSnapshot();
 });
