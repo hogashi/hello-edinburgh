@@ -28,6 +28,8 @@
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "jest": "^24.5.0",
     "jest-haste-map": "^24.5.0",
     "jest-resolve": "^24.5.0",
