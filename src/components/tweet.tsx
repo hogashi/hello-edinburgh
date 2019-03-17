@@ -37,7 +37,7 @@ const renderContent = (text: string, urls: IUrl[]) => {
   const contents: Array<string | JSX.Element> = [];
   const restText = urls.reduce((rest, url) => {
     const { short_url, expanded_url, display_url } = url;
-    if (rest.indexOf(short_url) === -1) {
+    if (rest.indexOf(short_url) === -1 || !rest.length) {
       return rest;
     }
     const [head, tail] = rest.split(short_url);

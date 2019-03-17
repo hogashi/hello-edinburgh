@@ -14,7 +14,7 @@ interface IUrl {
 interface ITweetBase {
   id: number,
   tweet_url: string,
-  created_at: Date,
+  created_at: string,
   user: IUser,
 }
 
