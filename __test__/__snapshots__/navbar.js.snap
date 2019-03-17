@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navbar 1`] = `
+exports[`Navbar render 1`] = `
 <nav>
   <div>
     <a
