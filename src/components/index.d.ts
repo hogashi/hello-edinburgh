@@ -11,14 +11,17 @@ interface IUrl {
   actual_url: string;
 }
 
-interface ITweet {
-  id: number;
+interface ITweetBase {
+  id: number,
+  tweet_url: string,
+  created_at: Date,
+  user: IUser,
+}
+
+interface ITweet extends ITweetBase {
   text: string;
-  tweet_url: string;
-  created_at: Date;
-  user: IUser;
   urls: IUrl[];
   media_urls: IUrl[];
-  retweeter?: ITweet;
+  retweeter?: ITweetBase;
   time?: number;
 }

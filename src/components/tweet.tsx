@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const renderRetweeter = (retweeter: ITweet | undefined) => {
+const renderRetweeter = (retweeter: ITweetBase | undefined) => {
   if (!retweeter) {
     return null;
   }
