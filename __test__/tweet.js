@@ -1,9 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { act } from 'react-dom/test-utils';
-import { configure, mount } from 'enzyme';
-import Adaptor from 'enzyme-adapter-react-16';
-configure({ adapter: new Adaptor() });
 
 import Tweet from '../src/components/tweet';
 
