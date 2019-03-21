@@ -16,7 +16,7 @@ export const App = () => {
     <div>
       <Navbar message={message} />
       <Textbox setMessage={setMessage} />
-      <Timeline />
+      <Timeline setMessage={setMessage} />
     </div>
   );
 };

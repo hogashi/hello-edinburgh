@@ -26,4 +26,5 @@ interface ITweet extends ITweetBase {
   urls: IUrl[];
   media_urls: IUrl[];
   retweeter?: ITweetBase;
+  colorIndex?: number;
 }

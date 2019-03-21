@@ -5,6 +5,7 @@ import Tweet from './tweet';
 const { useState, useEffect, useCallback } = React;
 
 const DURALATION = 60;
+const COLOR_NUMBER = 6;
 
 const loadTimeline = (sinceId: string): Promise<ITweet[]> => {
   console.log(`loading timeline, sinceId: ${sinceId}.`);
@@ -22,11 +23,16 @@ const loadTimeline = (sinceId: string): Promise<ITweet[]> => {
   });
 };
 
-export default () => {
+interface IProps {
+  setMessage: (message: string) => void;
+}
+
+export default ({ setMessage }: IProps) => {
   const [isActive, setIsActive] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [second, setSecond] = useState(DURALATION);
   const [tweets, setTweets] = useState([] as ITweet[]);
+  const [colorIndex, setColorIndex] = useState(0);
 
   const renderTweets = useCallback(() => {
     return tweets.map((tweet) => {
@@ -39,9 +45,18 @@ export default () => {
       return;
     }
     const sinceId = tweets[0] ? tweets[0].timebase_id : '';
-    loadTimeline(sinceId).then((newTweets) => {
-      setTweets([...newTweets, ...tweets]);
+    loadTimeline(sinceId).then((res) => {
       setIsLoading(false);
+      const newTweets = res.map((tweet) => {
+        tweet.colorIndex = colorIndex;
+        return tweet;
+      });
+      setTweets([...newTweets, ...tweets]);
+      if (newTweets.length !== 0) {
+        // 新しいツイートがあったときだけ色を進める
+        setColorIndex((colorIndex + 1) % COLOR_NUMBER);
+      }
+      setMessage(`${newTweets.length} tweets loaded at ${new Date().toLocaleString()}`);
     });
   }, [isLoading]);
 
@@ -65,6 +80,7 @@ export default () => {
     <div id='timeline'>
       <p>reload in: <span id='second'>{second}</span></p>
       <button onClick={() => setIsActive(!isActive)}>toggle</button>
+      <button onClick={() => setTweets([] as ITweet[])}>clear</button>
       <div id='tweets'>
         {renderTweets()}
       </div>

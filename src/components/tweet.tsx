@@ -85,7 +85,7 @@ const renderMedia = (media_urls: IUrl[]) => {
 };
 
 export default (props: ITweet) => {
-  const { id, timebase_id, text, tweet_url, created_at, user, retweeter, urls, media_urls } = props;
+  const { id, timebase_id, text, tweet_url, created_at, user, retweeter, urls, media_urls, colorIndex } = props;
   const { icon, name, screen_name } = user;
 
   if (media_urls.length) {
@@ -96,21 +96,24 @@ export default (props: ITweet) => {
 
   return (
     <div className='tweet' data-id={id} data-timebase-id={timebase_id}>
-      <div className='icon'>
-        <img src={icon} />
-      </div>
-      <div className='contents'>
-        <div className='user'>
-          <span className='name'>{name}</span>
-          <span className='screenName'>@{screen_name}</span>
-          <span className='createdAt'>
-            <a target='_blank' href={tweet_url}>{createdAt}</a>
-          </span>
+      <div className='container'>
+        <div className='icon'>
+          <img src={icon} />
         </div>
-        {renderContent(text, urls)}
-        {renderMedia(media_urls)}
-        {renderRetweeter(retweeter)}
+        <div className='contents'>
+          <div className='user'>
+            <span className='name'>{name}</span>
+            <span className='screenName'>@{screen_name}</span>
+            <span className='createdAt'>
+              <a target='_blank' href={tweet_url}>{createdAt}</a>
+            </span>
+          </div>
+          {renderContent(text, urls)}
+          {renderMedia(media_urls)}
+          {renderRetweeter(retweeter)}
+        </div>
       </div>
+      <div className={`colorBar color-${colorIndex}`} />
     </div>
   );
 };
