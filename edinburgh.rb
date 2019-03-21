@@ -146,21 +146,6 @@ class Edinburgh < Sinatra::Base
     redirect to('/')
   end
 
-  get '/timeline' do
-    redirect to('/') unless logged_in?
-
-    client = session[:client]
-    #tweets = client.home_timeline
-    #@tweets = tweets.map do |tweet|
-    #  format_tweet(tweet)
-    #end
-    #p @tweets
-
-    @message = session[:message]
-    session[:message] = ''
-    erb :timeline
-  end
-
   get '/' do
     @message = session[:message]
     session[:message] = ''
