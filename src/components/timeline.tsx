@@ -78,9 +78,13 @@ export default ({ setMessage }: IProps) => {
 
   return (
     <div id='timeline'>
-      <p>reload in: <span id='second'>{second}</span></p>
-      <button onClick={() => setIsActive(!isActive)}>toggle</button>
-      <button onClick={() => setTweets([] as ITweet[])}>clear</button>
+      <div className='indicators'>
+        <div className='loadIndicator'>
+          <p>reload in: <span id='second'>{second}</span></p>
+          <button onClick={() => setIsActive(!isActive)}>toggle</button>
+        </div>
+        <button onClick={() => setTweets([] as ITweet[])}>clear</button>
+      </div>
       <div id='tweets'>
         {renderTweets()}
       </div>

@@ -82,8 +82,27 @@ nav {
   padding: 0 3px $textbox-min-height;
   box-sizing: border-box;
 
-  > p {
+  .indicators {
+    display: flex;
+    justify-content: space-between;
     margin: 2px;
+
+    > .loadIndicator {
+      flex: 0 1 auto;
+      display: flex;
+
+      > p {
+        margin: 0 2px;
+      }
+
+      > button {
+        margin-left: 6px;
+      }
+    }
+
+    > button {
+      margin: 0 2px;
+    }
   }
 }
 
