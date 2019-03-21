@@ -4,10 +4,12 @@ import Tweet from './tweet';
 
 const { useState, useEffect, useCallback } = React;
 
-const loadTimeline = (sinceId: number): Promise<{ time: number, tweets: ITweet[] }> => {
-  console.log(`loading timeline, sinceId: ${sinceId}`);
+const DURALATION = 60;
+
+const loadTimeline = (sinceId: string): Promise<{ time: number, tweets: ITweet[] }> => {
+  console.log(`loading timeline, sinceId: ${sinceId}.`);
   const time = new Date().getTime();
-  return Axios.get(`/api/home_timeline?since_id=${sinceId || ''}`)
+  return Axios.get(`/api/home_timeline?since_id=${sinceId}`)
   .then((res) => {
     console.log(res);
     if (!res) {
@@ -29,14 +31,31 @@ const loadTimeline = (sinceId: number): Promise<{ time: number, tweets: ITweet[]
 
 export default () => {
   const [isActive, setIsActive] = useState(true);
-  const [second, setSecond] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [second, setSecond] = useState(DURALATION);
   const [tweets, setTweets] = useState([] as ITweet[]);
 
   const renderTweets = useCallback(() => {
     return tweets.map((tweet) => {
-      return <Tweet key={`${tweet.id}-${tweet.time}`} {...tweet} />;
+      return <Tweet key={`${tweet.timebase_id}-${tweet.time}`} {...tweet} />;
     });
   }, [tweets]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      return;
+    }
+    const sinceId = tweets[0] ? tweets[0].timebase_id : '';
+    loadTimeline(sinceId).then((res) => {
+      const time = res.time;
+      const newTweets = res.tweets.map((newTweet) => {
+        newTweet.time = time;
+        return newTweet;
+      });
+      setTweets([...newTweets, ...tweets]);
+      setIsLoading(false);
+    });
+  }, [isLoading]);
 
   useEffect(() => {
     if (!isActive) {
@@ -47,20 +66,12 @@ export default () => {
         if (sec > 0) {
           return sec - 1;
         }
-        const sinceId = tweets[0] ? tweets[0].id : 0;
-        loadTimeline(sinceId).then((res) => {
-          const time = res.time;
-          const newTweets = res.tweets.map((newTweet) => {
-            newTweet.time = time;
-            return newTweet;
-          });
-          setTweets([...newTweets, ...tweets]);
-        });
-        return 60;
+        setIsLoading(true);
+        return DURALATION;
       });
     }, 1000);
     return () => clearTimeout(timer);
-  }, [tweets, isActive]);
+  }, [isActive]);
 
   return (
     <div id='timeline'>
