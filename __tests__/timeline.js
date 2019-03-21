@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import renderer from 'react-test-renderer';
 import { act } from 'react-dom/test-utils';
 import { configure, mount } from 'enzyme';
