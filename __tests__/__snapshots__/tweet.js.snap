@@ -36,7 +36,7 @@ exports[`Tweet render normal tweet 1`] = `
           href="tweet.url"
           target="_blank"
         >
-          20190317-184720
+          2019/02/17-18:47:20
         </a>
       </span>
     </div>
@@ -88,7 +88,7 @@ exports[`Tweet render retweet 1`] = `
           href="tweet.url"
           target="_blank"
         >
-          20190317-184720
+          2019/02/17-18:47:20
         </a>
       </span>
     </div>
@@ -133,7 +133,7 @@ exports[`Tweet render retweet 1`] = `
           href="tweet.url"
           target="_blank"
         >
-          20190317-184720
+          2019/02/17-18:47:20
         </a>
       </span>
     </div>
@@ -177,7 +177,7 @@ exports[`Tweet render tweet with media 1`] = `
           href="tweet.url"
           target="_blank"
         >
-          20190317-184720
+          2019/02/17-18:47:20
         </a>
       </span>
     </div>
@@ -258,7 +258,7 @@ exports[`Tweet render tweet with urls 1`] = `
           href="tweet.url"
           target="_blank"
         >
-          20190317-184720
+          2019/02/17-18:47:20
         </a>
       </span>
     </div>

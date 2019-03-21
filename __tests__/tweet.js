@@ -17,13 +17,13 @@ const getTweetBase = () => {
   return {
     id: 0,
     tweet_url: 'tweet.url',
-    created_at: '20190317-184720',
+    created_at: Math.floor(new Date('2019-03-17T18:47:20').getTime() / 1000),
     user: {
       icon: 'user.icon',
       name: 'user.name',
       screen_name: 'user.screenName',
     },
-  }
+  };
 };
 
 const getTweet = () => {
