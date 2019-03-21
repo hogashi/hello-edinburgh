@@ -9,7 +9,7 @@ exports[`timeline render 1`] = `
     <span
       id="second"
     >
-      0
+      60
     </span>
   </p>
   <button
