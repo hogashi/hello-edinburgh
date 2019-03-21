@@ -141,6 +141,11 @@ class Edinburgh < Sinatra::Base
     erb :index
   end
 
+  get '/auth/failure' do
+    @message = 'failed'
+    redirect to('/')
+  end
+
   get '/timeline' do
     redirect to('/') unless logged_in?
 
