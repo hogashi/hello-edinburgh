@@ -23,6 +23,7 @@ const getTweetBase = () => {
       name: 'user.name',
       screen_name: 'user.screenName',
     },
+    colorIndex: 0,
   };
 };
 

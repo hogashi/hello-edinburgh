@@ -17,6 +17,11 @@ exports[`timeline render 1`] = `
   >
     toggle
   </button>
+  <button
+    onClick={[Function]}
+  >
+    clear
+  </button>
   <div
     id="tweets"
   />
