@@ -46,7 +46,7 @@ export default ({ setMessage }: IProps) => {
     //   text: text,
     // })
     Axios.get(`/api/tweet?text=${encodedText}`)
-    .then((res) => {
+    .then((res: { data: string }) => {
       console.log(res);
       if (res.data !== 'ng') {
         setText('');
