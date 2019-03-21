@@ -91,6 +91,8 @@ nav {
       display: flex;
 
       > p {
+        display: flex;
+        align-items: center;
         margin: 0 2px;
       }
 
