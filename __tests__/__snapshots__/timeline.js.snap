@@ -4,24 +4,32 @@ exports[`timeline render 1`] = `
 <div
   id="timeline"
 >
-  <p>
-    reload in: 
-    <span
-      id="second"
+  <div
+    className="indicators"
+  >
+    <div
+      className="loadIndicator"
     >
-      60
-    </span>
-  </p>
-  <button
-    onClick={[Function]}
-  >
-    toggle
-  </button>
-  <button
-    onClick={[Function]}
-  >
-    clear
-  </button>
+      <p>
+        reload in: 
+        <span
+          id="second"
+        >
+          60
+        </span>
+      </p>
+      <button
+        onClick={[Function]}
+      >
+        toggle
+      </button>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      clear
+    </button>
+  </div>
   <div
     id="tweets"
   />
