@@ -1,19 +1,5 @@
 import * as React from 'react';
-
-const zfill = (n: number, c: number = 2) => {
-  return `${'0'.repeat(c)}${n}`.slice(-c);
-};
-
-const formatCreatedAt = (raw: number) => {
-  const datetime = new Date(raw * 1000);
-  const year   = zfill(datetime.getFullYear(), 4);
-  const month  = zfill(datetime.getMonth());
-  const date   = zfill(datetime.getDate());
-  const hour = zfill(datetime.getHours());
-  const minute = zfill(datetime.getMinutes());
-  const second = zfill(datetime.getSeconds());
-  return `${year}/${month}/${date}-${hour}:${minute}:${second}`;
-};
+import { formatDate } from './util';
 
 const renderRetweeter = (retweeter: ITweetBase | undefined) => {
   if (!retweeter) {
@@ -23,7 +9,7 @@ const renderRetweeter = (retweeter: ITweetBase | undefined) => {
   const { tweet_url, created_at, user } = retweeter;
   const { icon, name, screen_name } = user;
 
-  const createdAt = formatCreatedAt(created_at);
+  const createdAt = formatDate(new Date(created_at * 1000));
 
   return (
     <div className='retweeter'>
@@ -92,7 +78,7 @@ export default (props: ITweet) => {
     urls.push(media_urls[0]);
   }
 
-  const createdAt = formatCreatedAt(created_at);
+  const createdAt = formatDate(new Date(created_at * 1000));
 
   return (
     <div className='tweet' data-id={id} data-timebase-id={timebase_id}>

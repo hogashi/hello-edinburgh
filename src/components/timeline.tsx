@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import * as React from 'react';
 import Tweet from './tweet';
+import { formatDate } from './util';
 
 const { useState, useEffect, useCallback } = React;
 
@@ -56,7 +57,7 @@ export default ({ setMessage }: IProps) => {
         // 新しいツイートがあったときだけ色を進める
         setColorIndex((colorIndex + 1) % COLOR_NUMBER);
       }
-      setMessage(`${newTweets.length} tweets loaded at ${new Date().toLocaleString()}`);
+      setMessage(`${newTweets.length} tweets loaded at ${formatDate(new Date())}`);
     });
   }, [isLoading]);
 
