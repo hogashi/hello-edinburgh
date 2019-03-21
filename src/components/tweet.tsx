@@ -1,5 +1,20 @@
 import * as React from 'react';
 
+const zfill = (n: number, c: number = 2) => {
+  return `${'0'.repeat(c)}${n}`.slice(-c);
+};
+
+const formatCreatedAt = (raw: number) => {
+  const datetime = new Date(raw * 1000);
+  const year   = zfill(datetime.getFullYear(), 4);
+  const month  = zfill(datetime.getMonth());
+  const date   = zfill(datetime.getDate());
+  const hour = zfill(datetime.getHours());
+  const minute = zfill(datetime.getMinutes());
+  const second = zfill(datetime.getSeconds());
+  return `${year}/${month}/${date}-${hour}:${minute}:${second}`;
+};
+
 const renderRetweeter = (retweeter: ITweetBase | undefined) => {
   if (!retweeter) {
     return null;
@@ -7,6 +22,8 @@ const renderRetweeter = (retweeter: ITweetBase | undefined) => {
 
   const { tweet_url, created_at, user } = retweeter;
   const { icon, name, screen_name } = user;
+
+  const createdAt = formatCreatedAt(created_at);
 
   return (
     <div className='retweeter'>
@@ -17,7 +34,7 @@ const renderRetweeter = (retweeter: ITweetBase | undefined) => {
       <span className='name'>{name}</span>
       <span className='screenName'>@{screen_name}</span>
       <span className='createdAt'>
-        <a target='_blank' href={tweet_url}>{created_at}</a>
+        <a target='_blank' href={tweet_url}>{createdAt}</a>
       </span>
     </div>
   );
@@ -75,6 +92,8 @@ export default (props: ITweet) => {
     urls.push(media_urls[0]);
   }
 
+  const createdAt = formatCreatedAt(created_at);
+
   return (
     <div className='tweet' data-id={id} data-timebase-id={timebase_id}>
       <div className='icon'>
@@ -85,7 +104,7 @@ export default (props: ITweet) => {
           <span className='name'>{name}</span>
           <span className='screenName'>@{screen_name}</span>
           <span className='createdAt'>
-            <a target='_blank' href={tweet_url}>{created_at}</a>
+            <a target='_blank' href={tweet_url}>{createdAt}</a>
           </span>
         </div>
         {renderContent(text, urls)}

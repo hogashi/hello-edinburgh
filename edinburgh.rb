@@ -48,12 +48,13 @@ class Edinburgh < Sinatra::Base
         :id => tweet.id.to_s,
         :timebase_id =>  tweet.id.to_s,
         :tweet_url => tweet.uri.to_s,
-        :created_at => tweet.created_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S"),
+        :created_at => tweet.created_at.dup.localtime('+09:00').to_i,
         :user => {
           :icon => user.profile_image_uri_https.to_s,
           :name => user.name,
           :screen_name => user.screen_name,
         },
+        :loaded_at => Time.now.to_i,
       }
       return formatted_base
     end

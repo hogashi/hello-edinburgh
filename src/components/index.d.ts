@@ -16,8 +16,9 @@ interface ITweetBase {
   // 普通のツイートなら普通の,RTならRTのid
   timebase_id: string,
   tweet_url: string,
-  created_at: string,
+  created_at: number,
   user: IUser,
+  loaded_at: number,
 }
 
 interface ITweet extends ITweetBase {
@@ -25,5 +26,4 @@ interface ITweet extends ITweetBase {
   urls: IUrl[];
   media_urls: IUrl[];
   retweeter?: ITweetBase;
-  time?: number;
 }

@@ -6,26 +6,19 @@ const { useState, useEffect, useCallback } = React;
 
 const DURALATION = 60;
 
-const loadTimeline = (sinceId: string): Promise<{ time: number, tweets: ITweet[] }> => {
+const loadTimeline = (sinceId: string): Promise<ITweet[]> => {
   console.log(`loading timeline, sinceId: ${sinceId}.`);
-  const time = new Date().getTime();
   return Axios.get(`/api/home_timeline?since_id=${sinceId}`)
   .then((res) => {
     console.log(res);
     if (!res) {
       throw new Error('response is empty');
     }
-    return {
-      time,
-      tweets: res.data as ITweet[],
-    };
+    return res.data as ITweet[];
   })
   .catch((err) => {
     console.log(err, err.response, err.response ? err.response.data : null);
-    return {
-      time,
-      tweets: [] as ITweet[],
-    };
+    return [] as ITweet[];
   });
 };
 
@@ -37,7 +30,7 @@ export default () => {
 
   const renderTweets = useCallback(() => {
     return tweets.map((tweet) => {
-      return <Tweet key={`${tweet.timebase_id}-${tweet.time}`} {...tweet} />;
+      return <Tweet key={`${tweet.timebase_id}-${tweet.loaded_at}`} {...tweet} />;
     });
   }, [tweets]);
 
@@ -46,12 +39,7 @@ export default () => {
       return;
     }
     const sinceId = tweets[0] ? tweets[0].timebase_id : '';
-    loadTimeline(sinceId).then((res) => {
-      const time = res.time;
-      const newTweets = res.tweets.map((newTweet) => {
-        newTweet.time = time;
-        return newTweet;
-      });
+    loadTimeline(sinceId).then((newTweets) => {
       setTweets([...newTweets, ...tweets]);
       setIsLoading(false);
     });
