@@ -6,6 +6,7 @@ require 'dotenv'
 
 require 'json'
 require 'sinatra/base'
+require 'sinatra/json'
 require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
 
@@ -21,9 +22,10 @@ class Edinburgh < Sinatra::Base
 
   configure do
     enable :sessions
-    use Rack::Session::Cookie, :key => 'rack.session',
-                               :expire_after => 60 * 60 * 24 * 30,
-                               :secret => Digest::SHA256.hexdigest(rand.to_s)
+    use Rack::Session::Cookie,
+      :key => 'rack.session',
+      :expire_after => 60 * 60 * 24 * 30,
+      :secret => Digest::SHA256.hexdigest(rand.to_s)
 
     mime_type :js, 'text/javascript'
     mime_type :css, 'text/css'
@@ -43,42 +45,53 @@ class Edinburgh < Sinatra::Base
     def format_tweet_base(tweet)
       user = tweet.user
       formatted_base = {
-        :id => tweet.id,
+        :id => tweet.id.to_s,
+        :timebase_id =>  tweet.id.to_s,
         :tweet_url => tweet.uri.to_s,
-        :created_at => tweet.created_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S"),
+        :created_at => tweet.created_at.dup.localtime('+09:00').to_i,
         :user => {
           :icon => user.profile_image_uri_https.to_s,
           :name => user.name,
           :screen_name => user.screen_name,
         },
+        :loaded_at => Time.now.to_i,
       }
       return formatted_base
     end
     def format_tweet(tweet)
-      p '----------'
+      # p '----------'
       retweeted_status = tweet.retweeted_status
       if retweeted_status.is_a? Twitter::Tweet
-        p tweet
-        p retweeted_status
+        # p tweet
+        # p retweeted_status
         retweeter = format_tweet_base(tweet)
         tweet = retweeted_status
       end
       formatted = format_tweet_base(tweet)
       formatted[:retweeter] = retweeter
-      p tweet.attrs
-      p "full: '#{tweet.attrs[:full_text]}'"
-      text = tweet.attrs[:full_text]
+      formatted[:timebase_id] = retweeter[:id] if retweeter
+      # p tweet.attrs
+      # p "full: '#{tweet.attrs[:full_text]}'"
+      formatted[:text] = tweet.attrs[:full_text]
+      formatted[:urls] = []
       tweet.uris.each do |u|
-        text = text.gsub(u.uri.to_s, "<a target=\"_blank\" href=\"#{u.expanded_uri.to_s}\">#{u.display_uri.to_s}</a>")
+        formatted[:urls].push({
+          :short_url => u.uri.to_s,
+          :expanded_url => u.expanded_uri.to_s,
+          :display_url => u.display_uri.to_s,
+          :actual_url => u.expanded_uri.to_s,
+        })
       end
-      media_urls = []
+      formatted[:media_urls] = []
       tweet.media.each do |m, i|
-        media_urls.push(m.media_url_https.to_s)
-        text = text.gsub(m.uri.to_s, "<a target=\"_blank\" href=\"#{m.media_url_https.to_s}\">#{m.display_uri.to_s}</a>")
+        formatted[:media_urls].push({
+          :short_url => m.url.to_s,
+          :expanded_url => m.expanded_url.to_s,
+          :display_url => m.display_url.to_s,
+          :actual_url => m.media_url_https.to_s
+        })
       end
-      formatted[:text] = text
-      formatted[:media_urls] = media_urls
-      p formatted
+      # p formatted
       return formatted
     end
   end
@@ -129,19 +142,9 @@ class Edinburgh < Sinatra::Base
     erb :index
   end
 
-  get '/timeline' do
-    redirect to('/') unless logged_in?
-
-    client = session[:client]
-    #tweets = client.home_timeline
-    #@tweets = tweets.map do |tweet|
-    #  format_tweet(tweet)
-    #end
-    #p @tweets
-
-    @message = session[:message]
-    session[:message] = ''
-    erb :timeline
+  get '/auth/failure' do
+    @message = 'failed'
+    redirect to('/')
   end
 
   get '/' do
@@ -157,7 +160,7 @@ class Edinburgh < Sinatra::Base
   get '/api/home_timeline' do
     return 401 unless logged_in?
 
-    p params
+    # p params
     # TODO, add count-number setting
     opts = {
       :count => 60,
@@ -167,18 +170,18 @@ class Edinburgh < Sinatra::Base
         :since_id => params[:since_id].to_i,
       }
     end
-    p opts
+    # p opts
 
     client = session[:client]
     begin
       tweets = client.home_timeline(opts)
     rescue => evar
-      p evar
-      p evar.code
-      p evar.message
-      p evar.rate_limit
+      # p evar
+      # p evar.code
+      # p evar.message
+      # p evar.rate_limit
       reset_at = evar.rate_limit.reset_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S")
-      p reset_at
+      # p reset_at
       return 400, "#{evar.code}, #{evar.message}, reset at: #{reset_at}"
     end
 
@@ -186,12 +189,12 @@ class Edinburgh < Sinatra::Base
       format_tweet(tweet)
     end
 
-    erb :tweets, :layout => false
+    json @tweets
   end
 
   # TODO, post にしたい
   get '/api/tweet' do
-    p params
+    # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
     text = params[:text]
     client = session[:client]
@@ -200,7 +203,7 @@ class Edinburgh < Sinatra::Base
     #p opts
     begin
       res = client.update(text, opts)
-      @message = "ok: #{res.id}"
+      @message = "ok: #{res.id.to_s}"
     rescue
       @message = "ng"
     end

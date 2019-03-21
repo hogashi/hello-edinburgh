@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Textbox render 1`] = `
+<div
+  id="textBox"
+>
+  <textarea
+    disabled={false}
+    id="text"
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder="geo info \\"from Edinburgh, Scotland, United Kingdom\\" goes with"
+    style={
+      Object {
+        "height": "calc(  1.4em +   6px +   2px)",
+      }
+    }
+    value=""
+  />
+  <button
+    id="goButton"
+    onClick={[Function]}
+  >
+    Tw
+  </button>
+</div>
+`;

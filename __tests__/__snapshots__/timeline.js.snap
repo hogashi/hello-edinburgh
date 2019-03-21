@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`timeline render 1`] = `
+<div
+  id="timeline"
+>
+  <div
+    className="indicators"
+  >
+    <div
+      className="loadIndicator"
+    >
+      <p>
+        reload in: 
+        <span
+          id="second"
+        >
+          60
+        </span>
+      </p>
+      <button
+        onClick={[Function]}
+      >
+        toggle
+      </button>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      clear
+    </button>
+  </div>
+  <div
+    id="tweets"
+  />
+</div>
+`;

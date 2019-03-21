@@ -1,0 +1,324 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tweet render normal tweet 1`] = `
+<div
+  className="tweet"
+  data-id={0}
+>
+  <div
+    className="container"
+  >
+    <div
+      className="icon"
+    >
+      <img
+        src="user.icon"
+      />
+    </div>
+    <div
+      className="contents"
+    >
+      <div
+        className="user"
+      >
+        <span
+          className="name"
+        >
+          user.name
+        </span>
+        <span
+          className="screenName"
+        >
+          @
+          user.screenName
+        </span>
+        <span
+          className="createdAt"
+        >
+          <a
+            href="tweet.url"
+            target="_blank"
+          >
+            2019/02/17-18:47:20
+          </a>
+        </span>
+      </div>
+      <div
+        className="text"
+      >
+        default text
+      </div>
+      <div
+        className="media"
+      />
+    </div>
+  </div>
+  <div
+    className="colorBar color-0"
+  />
+</div>
+`;
+
+exports[`Tweet render retweet 1`] = `
+<div
+  className="tweet"
+  data-id={0}
+>
+  <div
+    className="container"
+  >
+    <div
+      className="icon"
+    >
+      <img
+        src="user.icon"
+      />
+    </div>
+    <div
+      className="contents"
+    >
+      <div
+        className="user"
+      >
+        <span
+          className="name"
+        >
+          user.name
+        </span>
+        <span
+          className="screenName"
+        >
+          @
+          user.screenName
+        </span>
+        <span
+          className="createdAt"
+        >
+          <a
+            href="tweet.url"
+            target="_blank"
+          >
+            2019/02/17-18:47:20
+          </a>
+        </span>
+      </div>
+      <div
+        className="text"
+      >
+        default text
+      </div>
+      <div
+        className="media"
+      />
+      <div
+        className="retweeter"
+      >
+        <span
+          className="rtby"
+        >
+          RTby
+        </span>
+        <span
+          className="icon"
+        >
+          <img
+            src="user.icon"
+          />
+        </span>
+        <span
+          className="name"
+        >
+          user.name
+        </span>
+        <span
+          className="screenName"
+        >
+          @
+          user.screenName
+        </span>
+        <span
+          className="createdAt"
+        >
+          <a
+            href="tweet.url"
+            target="_blank"
+          >
+            2019/02/17-18:47:20
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="colorBar color-0"
+  />
+</div>
+`;
+
+exports[`Tweet render tweet with media 1`] = `
+<div
+  className="tweet"
+  data-id={0}
+>
+  <div
+    className="container"
+  >
+    <div
+      className="icon"
+    >
+      <img
+        src="user.icon"
+      />
+    </div>
+    <div
+      className="contents"
+    >
+      <div
+        className="user"
+      >
+        <span
+          className="name"
+        >
+          user.name
+        </span>
+        <span
+          className="screenName"
+        >
+          @
+          user.screenName
+        </span>
+        <span
+          className="createdAt"
+        >
+          <a
+            href="tweet.url"
+            target="_blank"
+          >
+            2019/02/17-18:47:20
+          </a>
+        </span>
+      </div>
+      <div
+        className="text"
+      >
+        hoge 
+        <a
+          href="url1ToBeExpended"
+          target="_blank"
+        >
+          url1ToBeDisplayed
+        </a>
+         fuga
+      </div>
+      <div
+        className="media"
+      >
+        <div
+          className="medium"
+        >
+          <img
+            src="url1ToBeActual"
+          />
+        </div>
+        <div
+          className="medium"
+        >
+          <img
+            src="url2ToBeActual"
+          />
+        </div>
+        <div
+          className="medium"
+        >
+          <img
+            src="url3ToBeActual"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="colorBar color-0"
+  />
+</div>
+`;
+
+exports[`Tweet render tweet with urls 1`] = `
+<div
+  className="tweet"
+  data-id={0}
+>
+  <div
+    className="container"
+  >
+    <div
+      className="icon"
+    >
+      <img
+        src="user.icon"
+      />
+    </div>
+    <div
+      className="contents"
+    >
+      <div
+        className="user"
+      >
+        <span
+          className="name"
+        >
+          user.name
+        </span>
+        <span
+          className="screenName"
+        >
+          @
+          user.screenName
+        </span>
+        <span
+          className="createdAt"
+        >
+          <a
+            href="tweet.url"
+            target="_blank"
+          >
+            2019/02/17-18:47:20
+          </a>
+        </span>
+      </div>
+      <div
+        className="text"
+      >
+        hoge 
+        <a
+          href="url1ToBeExpended"
+          target="_blank"
+        >
+          url1ToBeDisplayed
+        </a>
+         fuga 
+        <a
+          href="url2ToBeExpended"
+          target="_blank"
+        >
+          url2ToBeDisplayed
+        </a>
+         
+        <a
+          href="url3ToBeExpended"
+          target="_blank"
+        >
+          url3ToBeDisplayed
+        </a>
+        
+      </div>
+      <div
+        className="media"
+      />
+    </div>
+  </div>
+  <div
+    className="colorBar color-0"
+  />
+</div>
+`;

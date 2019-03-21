@@ -1,15 +1,16 @@
-<div>
-  <p>geo info "from Edinburgh, Scotland, United Kingdom" goes with</p>
-  <% if logged_in? %>
-    <textarea type="text" id="text" name="text" placeholder="text" cols="24" rows="10"></textarea>
-    <button type="submit" id="goButton" style="width: 50px; height: 50px;">go</button>
-    <p id="message"><%= @message %></p>
-    <div>
-      <a href="/logout">logout</a>
-    </div>
-  <% else %>
-    <div>
-      <a href="/auth/twitter">login</a>
-    </div>
-  <% end %>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edinburgh</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#0D2553">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/css/index.css">
+  <noscript>Can&apos;t exec JavaScript. Make sure that you are online.</noscript>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="/bundle.js"></script>
+</body>
+</html>
