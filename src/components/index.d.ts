@@ -12,7 +12,9 @@ interface IUrl {
 }
 
 interface ITweetBase {
-  id: number,
+  id: string,
+  // 普通のツイートなら普通の,RTならRTのid
+  timebase_id: string,
   tweet_url: string,
   created_at: string,
   user: IUser,

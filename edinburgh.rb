@@ -46,6 +46,7 @@ class Edinburgh < Sinatra::Base
       user = tweet.user
       formatted_base = {
         :id => tweet.id.to_s,
+        :timebase_id =>  tweet.id.to_s,
         :tweet_url => tweet.uri.to_s,
         :created_at => tweet.created_at.dup.localtime('+09:00').strftime("%Y%m%d-%H%M%S"),
         :user => {
@@ -67,6 +68,7 @@ class Edinburgh < Sinatra::Base
       end
       formatted = format_tweet_base(tweet)
       formatted[:retweeter] = retweeter
+      formatted[:timebase_id] = retweeter[:id] if retweeter
       # p tweet.attrs
       # p "full: '#{tweet.attrs[:full_text]}'"
       formatted[:text] = tweet.attrs[:full_text]

@@ -68,7 +68,7 @@ const renderMedia = (media_urls: IUrl[]) => {
 };
 
 export default (props: ITweet) => {
-  const { id, text, tweet_url, created_at, user, retweeter, urls, media_urls } = props;
+  const { id, timebase_id, text, tweet_url, created_at, user, retweeter, urls, media_urls } = props;
   const { icon, name, screen_name } = user;
 
   if (media_urls.length) {
@@ -76,7 +76,7 @@ export default (props: ITweet) => {
   }
 
   return (
-    <div className='tweet' data-id={retweeter ? retweeter.id : id}>
+    <div className='tweet' data-id={id} data-timebase-id={timebase_id}>
       <div className='icon'>
         <img src={icon} />
       </div>
