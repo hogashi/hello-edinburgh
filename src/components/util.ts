@@ -6,7 +6,7 @@ const zfill = (n: number, c: number = 2) => {
 
 export const formatDate = (datetime: Date) => {
   const year = zfill(datetime.getFullYear(), 4);
-  const month = zfill(datetime.getMonth());
+  const month = zfill(datetime.getMonth() + 1);
   const date = zfill(datetime.getDate());
   const hour = zfill(datetime.getHours());
   const minute = zfill(datetime.getMinutes());
