@@ -77,14 +77,18 @@ export default ({ setMessage }: IProps) => {
     return () => clearTimeout(timer);
   }, [isActive]);
 
+  const barStyle = {
+    width: `${Math.floor(100.0 * second / DURALATION * 10.0) / 10.0}%`,
+  };
+
   return (
     <div id='timeline'>
       <div className='indicators'>
-        <div className='loadIndicator'>
-          <p>reload in: <span id='second'>{second}</span></p>
+        <div className='waitBar' style={barStyle} data-second={second} />
+        <div className='buttons'>
           <button onClick={() => setIsActive(!isActive)}>toggle</button>
+          <button onClick={() => setTweets([] as ITweet[])}>clear</button>
         </div>
-        <button onClick={() => setTweets([] as ITweet[])}>clear</button>
       </div>
       <div id='tweets'>
         {renderTweets()}

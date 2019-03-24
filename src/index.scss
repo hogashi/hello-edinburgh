@@ -83,26 +83,24 @@ nav {
 
   .indicators {
     display: flex;
-    justify-content: space-between;
+    flex-flow: column;
+    align-content: stretch;
     margin: 2px;
 
-    > .loadIndicator {
-      flex: 0 1 auto;
-      display: flex;
-
-      > p {
-        display: flex;
-        align-items: center;
-        margin: 0 2px;
-      }
-
-      > button {
-        margin-left: 6px;
-      }
+    > .waitBar {
+      flex: 0 1 3px;
+      background-color: #303030;
+      transition: width 1s linear;
     }
 
-    > button {
-      margin: 0 2px;
+    > .buttons {
+      flex: 0 1 auto;
+      display: flex;
+      justify-content: space-between;
+
+      > button {
+        flex: 0 1 auto;
+      }
     }
   }
 }
