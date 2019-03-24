@@ -91,6 +91,8 @@ nav {
       flex: 0 1 3px;
       background-color: #303030;
       transition: width 1s linear;
+      max-width: 100%;
+      margin-bottom: 2px;
     }
 
     > .buttons {

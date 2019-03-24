@@ -12,7 +12,7 @@ exports[`timeline render 1`] = `
       data-second={60}
       style={
         Object {
-          "width": "100%",
+          "width": "101.2%",
         }
       }
     />
