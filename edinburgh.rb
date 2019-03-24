@@ -166,9 +166,7 @@ class Edinburgh < Sinatra::Base
       :count => 60,
     }
     if !params[:since_id].empty?
-      opts = {
-        :since_id => params[:since_id].to_i,
-      }
+      opts[:since_id] = params[:since_id].to_i
     end
     # p opts
 
