@@ -8,7 +8,6 @@
   "scripts": {
     "build-dev": "run-p build:js-dev copy",
     "build": "run-p build:js copy",
-    "heroku-postbuild": "run-s build",
     "build:js-dev": "webpack --mode development --config webpack.config.js",
     "build:js": "webpack --mode production --config webpack.config.js",
     "copy": "mkdir -p public && cp -rf static/* public/",
