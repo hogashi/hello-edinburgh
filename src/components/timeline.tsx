@@ -77,14 +77,24 @@ export default ({ setMessage }: IProps) => {
     return () => clearTimeout(timer);
   }, [isActive]);
 
+  const barStyle = {
+    // 待ち時間のバーをcss transitionでアニメーションする
+    // - 100%が最大だと、0->60秒に回復するあたりで回復しきらないので、
+    //   103%を最大にして計算する(cssでmax-width: 100%する)
+    // - 指定した値になるまでに1秒かかるので、
+    //   1秒先の値を指定することで見える量を現在値に近づけるために
+    //   DURALATION + 1で剰余をとる
+    width: `${Math.floor(103.0 * ((DURALATION + second) % (DURALATION + 1)) / DURALATION * 10.0) / 10.0}%`,
+  };
+
   return (
     <div id='timeline'>
       <div className='indicators'>
-        <div className='loadIndicator'>
-          <p>reload in: <span id='second'>{second}</span></p>
+        <div className='waitBar' style={barStyle} data-second={second} />
+        <div className='buttons'>
           <button onClick={() => setIsActive(!isActive)}>toggle</button>
+          <button onClick={() => setTweets([] as ITweet[])}>clear</button>
         </div>
-        <button onClick={() => setTweets([] as ITweet[])}>clear</button>
       </div>
       <div id='tweets'>
         {renderTweets()}

@@ -8,27 +8,28 @@ exports[`timeline render 1`] = `
     className="indicators"
   >
     <div
-      className="loadIndicator"
+      className="waitBar"
+      data-second={60}
+      style={
+        Object {
+          "width": "101.2%",
+        }
+      }
+    />
+    <div
+      className="buttons"
     >
-      <p>
-        reload in: 
-        <span
-          id="second"
-        >
-          60
-        </span>
-      </p>
       <button
         onClick={[Function]}
       >
         toggle
       </button>
+      <button
+        onClick={[Function]}
+      >
+        clear
+      </button>
     </div>
-    <button
-      onClick={[Function]}
-    >
-      clear
-    </button>
   </div>
   <div
     id="tweets"
