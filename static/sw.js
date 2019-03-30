@@ -1,10 +1,11 @@
-const VERSION = '201903080453';
+const VERSION = '201903302136';
 
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(VERSION).then(cache => {
       return cache.addAll([
         // '/bundle.js',
+        '/css/index.css',
         '/images/icon.png',
         '/favicon.ico',
       ]);
