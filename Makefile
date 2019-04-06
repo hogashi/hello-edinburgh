@@ -1,5 +1,5 @@
 build-dev:
-	bundle install --path vendor/bundle
+	bundle install --path vendor/bundle --verbose
 	yarn install && yarn build-dev
 
 build:
