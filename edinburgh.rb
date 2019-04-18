@@ -25,7 +25,7 @@ class Edinburgh < Sinatra::Base
     use Rack::Session::Cookie,
       :key => 'rack.session',
       :expire_after => 60 * 60 * 24 * 30,
-      :secret => Digest::SHA256.hexdigest(rand.to_s)
+      :secret => ENV["RACK_COOKIE_SECRET"]
 
     mime_type :js, 'text/javascript'
     mime_type :css, 'text/css'
