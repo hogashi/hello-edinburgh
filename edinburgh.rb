@@ -36,11 +36,14 @@ class Edinburgh < Sinatra::Base
   end
 
   helpers do
-    def logged_in?
-      !session[:client].nil?
-    end
-    def current_client
-      session[:client]
+    def client
+      return nil if session[:credentials].nil?
+      @client || Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV["CONSUMER_KEY"]
+        config.consumer_secret     = ENV["CONSUMER_SECRET"]
+        config.access_token        = session[:credentials][:token]
+        config.access_token_secret = session[:credentials][:secret]
+      end
     end
     def format_tweet_base(tweet)
       user = tweet.user
@@ -107,16 +110,10 @@ class Edinburgh < Sinatra::Base
   get '/auth/twitter/callback' do
     auth_hash = env['omniauth.auth']
     #p auth_hash
-    credentials = auth_hash[:credentials]
-    #p credentials
 
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV["CONSUMER_KEY"]
-      config.consumer_secret     = ENV["CONSUMER_SECRET"]
-      config.access_token        = credentials[:token]
-      config.access_token_secret = credentials[:secret]
-    end
-    #p client
+    # p client
+    session[:credentials] = auth_hash[:credentials]
+    # p client
 
     # Edinburgh, Scotland
     geoopts = {
@@ -129,8 +126,6 @@ class Edinburgh < Sinatra::Base
     #p place
 
     #session[:auth_hash] = auth_hash
-    @client = client
-    session[:client] = client
     session[:opts] = { :place => place }
     session[:message] = 'logged in'
 
@@ -156,7 +151,7 @@ class Edinburgh < Sinatra::Base
 
   # API
   get '/api/home_timeline' do
-    return 401 unless logged_in?
+    return 401 if client.nil?
 
     # p params
     # TODO, add count-number setting
@@ -168,8 +163,6 @@ class Edinburgh < Sinatra::Base
     end
     # p opts
 
-    p @client
-    client = session[:client]
     begin
       tweets = client.home_timeline(opts)
     rescue => evar
@@ -194,7 +187,6 @@ class Edinburgh < Sinatra::Base
     # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
     text = params[:text]
-    client = session[:client]
     #p client
     opts = session[:opts]
     #p opts
@@ -215,7 +207,6 @@ class Edinburgh < Sinatra::Base
     p params
     p "#{params[:id]} : #{Time.now().to_s}"
     id = params[:id].to_i
-    client = session[:client]
     #p client
     begin
       res = client.favorite([id])
