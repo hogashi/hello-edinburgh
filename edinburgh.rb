@@ -129,6 +129,7 @@ class Edinburgh < Sinatra::Base
     #p place
 
     #session[:auth_hash] = auth_hash
+    @client = client
     session[:client] = client
     session[:opts] = { :place => place }
     session[:message] = 'logged in'
@@ -154,9 +155,6 @@ class Edinburgh < Sinatra::Base
   end
 
   # API
-  get '/api/rate_limit_status' do
-  end
-
   get '/api/home_timeline' do
     return 401 unless logged_in?
 
@@ -170,6 +168,7 @@ class Edinburgh < Sinatra::Base
     end
     # p opts
 
+    p @client
     client = session[:client]
     begin
       tweets = client.home_timeline(opts)
@@ -205,9 +204,26 @@ class Edinburgh < Sinatra::Base
     rescue
       @message = "ng"
     end
-    #p res
-    session[:message] = ''
-    #erb :index
+    # p res
+    @message
+  end
+
+  get '/api/rate_limit_status' do
+  end
+
+  get '/api/favorite_tweet' do
+    p params
+    p "#{params[:id]} : #{Time.now().to_s}"
+    id = params[:id].to_i
+    client = session[:client]
+    #p client
+    begin
+      res = client.favorite([id])
+      @message = "ok: liked #{res[0].id.to_s}"
+    rescue
+      @message = "ng"
+    end
+    p res
     @message
   end
 
