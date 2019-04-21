@@ -30,6 +30,7 @@ class Edinburgh < Sinatra::Base
     mime_type :js, 'text/javascript'
     mime_type :css, 'text/css'
 
+    OmniAuth.config.full_host = ENV["HOST_NAME"]
     use OmniAuth::Builder do
       provider :twitter, ENV["CONSUMER_KEY"], ENV["CONSUMER_SECRET"]
     end
