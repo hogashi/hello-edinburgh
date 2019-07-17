@@ -26,7 +26,7 @@
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.0",
-    "enzyme": "^3.9.0",
+    "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.8.0",
     "jest-haste-map": "^24.5.0",
