@@ -30,7 +30,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.8.0",
     "jest-haste-map": "^24.8.1",
-    "jest-resolve": "^24.5.0",
+    "jest-resolve": "^24.8.0",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "react-test-renderer": "^16.8.6",
