@@ -22,7 +22,7 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/react-test-renderer": "^16.8.1",
+    "@types/react-test-renderer": "^16.8.2",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.0",
