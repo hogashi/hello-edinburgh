@@ -40,7 +40,7 @@
     "tslint": "5.18.0",
     "tslint-react": "4.0.0",
     "url-loader": "2.1.0",
-    "webpack": "4.36.0",
+    "webpack": "4.36.1",
     "webpack-cli": "3.3.6"
   },
   "dependencies": {
