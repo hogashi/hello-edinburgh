@@ -11,7 +11,7 @@ require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
 
 require 'twitter'
-require 'omniauth-twitter'
+require 'omniauth-twitter-rails_csrf_protection'
 
 Dotenv.load
 
