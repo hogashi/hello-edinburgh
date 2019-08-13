@@ -102,8 +102,17 @@ class Edinburgh < Sinatra::Base
 
   before do
     #p settings.production?
+    #p ENV['FORCE_HTTPS']
     #p request.secure?
-    if settings.production? && !request.secure?
+    r = {
+      :host => request.host,
+      :port => request.port,
+      :path => request.path,
+      :query_string => request.query_string,
+    }
+    #p r
+    if settings.production? && !ENV['FORCE_HTTPS'].nil? && !request.secure?
+      #p request.url.gsub(/^http/, 'https')
       redirect to(request.url.gsub(/^http/, 'https'))
     end
   end
@@ -183,7 +192,7 @@ class Edinburgh < Sinatra::Base
     json @tweets
   end
 
-  # TODO, post にしたい
+  # TODO, post ÃÂÃÂ£ÃÂÃÂÃÂÃÂ«ÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂ
   get '/api/tweet' do
     # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
