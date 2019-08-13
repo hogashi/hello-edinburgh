@@ -11,7 +11,7 @@ require 'sinatra/reloader' if Sinatra::Base.development?
 require 'thin'
 
 require 'twitter'
-require 'omniauth-twitter-rails_csrf_protection'
+require 'omniauth-twitter'
 
 Dotenv.load
 
@@ -185,7 +185,7 @@ class Edinburgh < Sinatra::Base
     json @tweets
   end
 
-  # TODO, post にしたい
+  # TODO, post ã«ããã
   get '/api/tweet' do
     # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
