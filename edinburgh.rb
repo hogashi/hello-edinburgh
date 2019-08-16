@@ -192,7 +192,7 @@ class Edinburgh < Sinatra::Base
     json @tweets
   end
 
-  # TODO, post ÃÂÃÂ£ÃÂÃÂÃÂÃÂ«ÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂÃÂÃÂ£ÃÂÃÂÃÂÃÂ
+  # TODO, post にしたい
   get '/api/tweet' do
     # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
