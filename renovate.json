@@ -3,5 +3,6 @@
     "config:base",
     ":masterIssue",
     ":masterIssueApproval"
-  ]
+  ],
+  "automerge": true
 }
