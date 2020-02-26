@@ -92,7 +92,7 @@ GEM
     multipart-post (2.1.1)
     mustermann (1.0.3)
     naught (1.1.0)
-    nokogiri (1.10.5)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.4)
     omniauth (1.9.0)
