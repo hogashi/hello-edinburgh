@@ -36,7 +36,7 @@
     "style-loader": "1.0.0",
     "ts-loader": "6.1.0",
     "tslint": "5.20.0",
-    "tslint-react": "4.0.0",
+    "tslint-react": "4.1.0",
     "url-loader": "2.1.0",
     "webpack": "4.40.2",
     "webpack-cli": "3.3.8"
