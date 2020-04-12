@@ -39,7 +39,7 @@
     "tslint-react": "4.1.0",
     "url-loader": "2.1.0",
     "webpack": "4.42.1",
-    "webpack-cli": "3.3.8"
+    "webpack-cli": "3.3.11"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
