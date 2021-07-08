@@ -30,6 +30,7 @@ class Edinburgh < Sinatra::Base
     mime_type :js, 'text/javascript'
     mime_type :css, 'text/css'
 
+    OmniAuth.config.full_host = ENV["HOST_NAME"]
     use OmniAuth::Builder do
       provider :twitter, ENV["CONSUMER_KEY"], ENV["CONSUMER_SECRET"]
     end
@@ -101,8 +102,17 @@ class Edinburgh < Sinatra::Base
 
   before do
     #p settings.production?
+    #p ENV['FORCE_HTTPS']
     #p request.secure?
-    if settings.production? && !request.secure?
+    r = {
+      :host => request.host,
+      :port => request.port,
+      :path => request.path,
+      :query_string => request.query_string,
+    }
+    #p r
+    if settings.production? && !ENV['FORCE_HTTPS'].nil? && !request.secure?
+      #p request.url.gsub(/^http/, 'https')
       redirect to(request.url.gsub(/^http/, 'https'))
     end
   end
@@ -150,9 +160,6 @@ class Edinburgh < Sinatra::Base
   end
 
   # API
-  get '/api/rate_limit_status' do
-  end
-
   get '/api/home_timeline' do
     return 401 if client.nil?
 
@@ -185,7 +192,7 @@ class Edinburgh < Sinatra::Base
     json @tweets
   end
 
-  # TODO, post ã«ããã
+  # TODO, post にしたい
   get '/api/tweet' do
     # p params
     #text = "#{params[:text]} : #{Time.now().to_s}"
@@ -199,7 +206,25 @@ class Edinburgh < Sinatra::Base
     rescue
       @message = "ng"
     end
-    #p res
+    # p res
+    @message
+  end
+
+  get '/api/rate_limit_status' do
+  end
+
+  get '/api/favorite_tweet' do
+    p params
+    p "#{params[:id]} : #{Time.now().to_s}"
+    id = params[:id].to_i
+    #p client
+    begin
+      res = client.favorite([id])
+      @message = "ok: liked #{res[0].id.to_s}"
+    rescue
+      @message = "ng"
+    end
+    p res
     @message
   end
 

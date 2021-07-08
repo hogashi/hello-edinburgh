@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { formatDate } from './util';
+import Axios from 'axios';
+
+const { useCallback } = React;
 
 const renderRetweeter = (retweeter: ITweetBase | undefined) => {
   if (!retweeter) {
@@ -80,6 +83,12 @@ export default (props: ITweet) => {
 
   const createdAt = formatDate(new Date(created_at * 1000));
 
+  const onLikeClick = useCallback(() => {
+    Axios.get(`/api/favorite_tweet?id=${id}`).then((res: any) => {
+      console.log(res);
+    });
+  }, []);
+
   return (
     <div className='tweet' data-id={id} data-timebase-id={timebase_id}>
       <div className='container'>
@@ -98,6 +107,7 @@ export default (props: ITweet) => {
           {renderMedia(media_urls)}
           {renderRetweeter(retweeter)}
         </div>
+        <button onClick={onLikeClick}>☆</button>
       </div>
       <div className={`colorBar color-${colorIndex}`} />
     </div>
